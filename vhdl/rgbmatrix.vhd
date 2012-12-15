@@ -25,9 +25,9 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-use work.rgbmatrix.all; -- Constants & Configuration
+use work.rgbmatrix_pkg.all; -- Constants & Configuration
 
-entity top_level is
+entity rgbmatrix is
     port (
         clk_in  : in std_logic;
         rst_n   : in std_logic;
@@ -44,9 +44,9 @@ entity top_level is
         lat     : out std_logic;
         oe      : out std_logic
     );
-end top_level;
+end rgbmatrix;
 
-architecture str of top_level is
+architecture str of rgbmatrix is
     -- Reset signals
     signal rst, rst_p, jtag_rst_out : std_logic;
     
