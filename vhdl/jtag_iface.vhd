@@ -29,7 +29,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.rgbmatrix.all;
+use work.rgbmatrix_pkg.all;
 
 entity jtag_iface is
     port (

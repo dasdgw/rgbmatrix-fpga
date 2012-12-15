@@ -26,7 +26,7 @@ library ieee;
 use ieee.math_real.log2;
 use ieee.math_real.ceil;
 
-package rgbmatrix is
+package rgbmatrix_pkg is
     
     -- User configurable constants
     constant NUM_PANELS   : integer := 2; -- total number of LED matrix panels
@@ -44,4 +44,4 @@ package rgbmatrix is
     constant IMG_WIDTH      : positive := PANEL_WIDTH*NUM_PANELS;
     constant IMG_WIDTH_LOG2 : positive := positive(log2(real(IMG_WIDTH)));
     
-end rgbmatrix;
+end rgbmatrix_pkg;
