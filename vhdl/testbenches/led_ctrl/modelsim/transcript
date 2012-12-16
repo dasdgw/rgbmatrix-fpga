@@ -1,0 +1,58 @@
+# Loading project ledctrl
+# Compile of ledctrl_tb.vhd failed with 1 errors.
+# Compile of ledctrl_tb.vhd failed with 1 errors.
+# Compile of rgbmatrix_pkg.vhd was successful.
+# 2 compiles, 1 failed with 1 error. 
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl_tb.vhd failed.
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl_tb.vhd failed with 1 errors.
+# 2 compiles, 1 failed with 1 error. 
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl_tb.vhd failed with 1 errors.
+# Compile of ledctrl.vhd was successful.
+# 3 compiles, 1 failed with 1 error. 
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl_tb.vhd was successful.
+# Compile of ledctrl.vhd was successful.
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl_tb.vhd was successful.
+# Compile of ledctrl.vhd was successful.
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl_tb.vhd was successful.
+# Compile of ledctrl.vhd was successful.
+# 3 compiles, 0 failed with no errors. 
+# Compile of rgbmatrix_pkg.vhd was successful.
+# Compile of ledctrl.vhd was successful.
+# Compile of ledctrl_tb.vhd was successful.
+vsim work.ledctrl_tb
+# vsim work.ledctrl_tb 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.math_real(body)
+# Loading work.rgbmatrix_pkg
+# Loading ieee.numeric_std(body)
+# Loading work.ledctrl_tb(tb)
+# Loading work.ledctrl(bhv)
+add wave  \
+sim:/ledctrl_tb/clk_in \
+sim:/ledctrl_tb/rst \
+sim:/ledctrl_tb/clk_out \
+sim:/ledctrl_tb/lat \
+sim:/ledctrl_tb/oe \
+sim:/ledctrl_tb/rgb1 \
+sim:/ledctrl_tb/rgb2 \
+sim:/ledctrl_tb/led_addr \
+sim:/ledctrl_tb/addr \
+sim:/ledctrl_tb/data
+run
+run
+restart
+run
+run
+restart
+run
+restart
+run
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf /home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/testbenches/led_ctrl/modelsim/wave.do

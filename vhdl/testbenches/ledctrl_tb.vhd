@@ -25,7 +25,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-use work.rgbmatrix.all;
+use work.rgbmatrix_pkg.all;
 
 entity ledctrl_tb is
 end ledctrl_tb;
@@ -34,7 +34,8 @@ architecture tb of ledctrl_tb is
     constant clk_period : time := 20 ns; -- for a 50MHz clock
     constant num_cycles : positive := 10; -- change this to your liking
     --
-    signal clk_in, rst, clk_out, lat, oe : std_logic;
+    signal clk_in :std_logic:='0';
+    signal rst, clk_out, lat, oe : std_logic;
     signal rgb1     : std_logic_vector(2 downto 0);
     signal rgb2     : std_logic_vector(2 downto 0);
     signal led_addr : std_logic_vector(2 downto 0);
@@ -45,7 +46,7 @@ begin
     -- Instantiate the Unit Under Test (UUT)
     UUT : entity work.ledctrl
         port map (
-            clk_in   => clk_in,
+            clk   => clk_in,
             rst      => rst,
             clk_out  => clk_out,
             rgb1     => rgb1,

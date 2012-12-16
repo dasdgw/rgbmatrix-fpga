@@ -1,0 +1,30 @@
+/home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/testbenches/ledctrl_tb.vhd {1 {vcom -work work -2002 -explicit /home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/testbenches/ledctrl_tb.vhd
+Model Technology ModelSim ALTERA vcom 10.1b Compiler 2012.04 Apr 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package MATH_REAL
+-- Loading package rgbmatrix_pkg
+-- Compiling entity ledctrl_tb
+-- Compiling architecture tb of ledctrl_tb
+-- Loading package NUMERIC_STD
+-- Loading entity ledctrl
+
+} {} {}} /home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/ledctrl.vhd {1 {vcom -work work -2002 -explicit /home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/ledctrl.vhd
+Model Technology ModelSim ALTERA vcom 10.1b Compiler 2012.04 Apr 27 2012
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Loading package rgbmatrix_pkg
+-- Compiling entity ledctrl
+-- Compiling architecture bhv of ledctrl
+
+} {} {}} /home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/rgbmatrix_pkg.vhd {1 {vcom -work work -2002 -explicit /home/dasdgw/fpga/projects/de0nano/projects/rgbmatrix-fpga/vhdl/rgbmatrix_pkg.vhd
+Model Technology ModelSim ALTERA vcom 10.1b Compiler 2012.04 Apr 27 2012
+-- Loading package STANDARD
+-- Loading package MATH_REAL
+-- Compiling package rgbmatrix_pkg
+
+} {} {}}
