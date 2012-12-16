@@ -29,7 +29,7 @@ use ieee.math_real.ceil;
 package rgbmatrix_pkg is
     
     -- User configurable constants
-    constant NUM_PANELS   : integer := 2; -- total number of LED matrix panels
+    constant NUM_PANELS   : integer := 1; -- total number of LED matrix panels
     constant PIXEL_DEPTH  : integer := 8; -- number of bits per pixel
     
     -- Special constants (change these at your own risk, stuff might break!)
