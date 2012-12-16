@@ -93,15 +93,18 @@ begin
         end if;
     end process;
     
+
+jtag_tdo<= dr1(0) when dr_select='1' else dr0;
     -- Maintain the TDO continuity
-    process(dr_select, dr0, dr1)
-    begin
-        if(dr_select = '1') then
-            jtag_tdo <= dr1(0);
-        else
-            jtag_tdo <= dr0;
-        end if;
-    end process;
+--    process(dr_select, dr0, dr1)
+--    begin
+--        if(dr_select = '1') then
+--            jtag_tdo <= dr1(0);
+--        else
+--            jtag_tdo <= dr0;
+--        end if;
+--    end process;
+
     
     -- The UDR signal will assert when the data has been transmitted and the data register has
     -- captured the word. Ignoring this signal will cause an unwanted behavior as data is shifted
