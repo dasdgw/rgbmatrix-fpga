@@ -35,7 +35,7 @@ use work.rgbmatrix_pkg.all;
 
 entity ledctrl is
     port (
-        clk_in   : in  std_logic;
+        clk   : in  std_logic;
         rst      : in  std_logic;
         -- LED Panel IO
         clk_out  : out std_logic;
@@ -52,7 +52,6 @@ end ledctrl;
 
 architecture bhv of ledctrl is
     -- Internal signals
-    signal clk : std_logic;
     
     -- Essential state machine signals
     type STATE_TYPE is (INIT, READ_PIXEL_DATA, INCR_RAM_ADDR, LATCH, INCR_LED_ADDR);
@@ -66,19 +65,7 @@ architecture bhv of ledctrl is
     signal s_rgb1, next_rgb1, s_rgb2, next_rgb2 : std_logic_vector(2 downto 0);
     signal s_oe, s_lat, s_clk_out : std_logic;
 begin
-    
-    -- A simple clock divider is used here to slow down this part of the circuit
-    U_CLKDIV : entity work.clk_div
-        generic map (
-            clk_in_freq  => 50000000, -- 50MHz input clock
-            clk_out_freq => 10000000  -- 10MHz output clock
-        )
-        port map (
-            rst => rst,
-            clk_in => clk_in,
-            clk_out => clk
-        );
-    
+       
     -- Breakout internal signals to the output port
     led_addr <= s_led_addr;
     addr <= s_ram_addr;

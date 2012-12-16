@@ -68,7 +68,7 @@ begin
     U_LEDCTRL : entity work.ledctrl
         port map (
             rst => rst,
-            clk_in => clk_in,
+            clk => clk_in,
             -- Connection to LED panel
             clk_out => clk_out,
             rgb1(2) => r1,
