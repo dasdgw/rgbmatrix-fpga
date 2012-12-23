@@ -32,18 +32,12 @@ void draw() {
   // Capture the image, rearrange it necessary for this panel configuration
   PImage img = get(0, 0, imgWidth, imgHeight);
   
+ 
   // Preview image data on computer display
   image(img, 0, 0, imgWidth*imgScale, imgHeight*imgScale);
   
   // Issue pixel data to the FPGA
   refresh(img);
-  
-  // Stop when the end is reached
-  if(frameNum >= panelsTall*panelsWide*pixelsTall*pixelsWide/4-1) {
-    exit();
-  } else {
-    frameNum++;
-  }
-  
+  exit();
 }
 
