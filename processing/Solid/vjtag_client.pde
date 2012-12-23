@@ -56,19 +56,20 @@ void push_frame(PImage frame) {
   for(int i = 0; i < middlePixel; i++) {
     // Get the upper and lower pixel's RGB data (mask off alpha)
     int upper = frame.pixels[i] & 0x00FFFFFF;
-    int lower = frame.pixels[i+middlePixel-1] & 0x00FFFFFF;
+    int lower = frame.pixels[i+middlePixel] & 0x00FFFFFF;
     // Append this new data to the bitwise-least-significant-end of the "bigint" accumulator
-    BigInteger shifted = BigInteger.valueOf(upper).shiftLeft(i*48+24);
-    shifted = shifted.or(BigInteger.valueOf(lower).shiftLeft(i*48));
+    BigInteger shifted = BigInteger.valueOf(lower).shiftLeft(i*48+24);
+    shifted = shifted.or(BigInteger.valueOf(upper).shiftLeft(i*48));
     bigint = bigint.or(shifted);
   }
-  // Now, send data in blocks of 6 bytes to the server as a hex string followed by a newline
-  // todo: why do we have send 12 bytes instead of the expacted 6 bytes?
-  String hexStr = pad_string(bigint.toString(16), frame.width*frame.height*24/4+6);
+  // Now, send completed data to the server as a hex string followed by a newline
+  String hexStr = pad_string(bigint.toString(16), frame.width*frame.height*24/4);
   for(int i=0;i<(frame.width*frame.height/2);i++){
-    jtagsrv.write(hexStr.substring(12*i,12*(i+1)+1) + "\n");
-  }
+jtagsrv.write(hexStr.substring(12*i,12*(i+1)) + "\n");
+} 
 }
+
+ 
 
 void blank_leds() {
   // First, reset the design on the FPGA
