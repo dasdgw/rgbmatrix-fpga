@@ -5,6 +5,20 @@ program:
 start_server:
 	quartus_stp -t ../tcl/vjtag_server.tcl &
 
+detect:
+	linux32 quartus_pgm -c 1 -a
+
+compile:
+	quartus_sh --flow compile DE0_Nano -c DE0_Nano
+
 clean:
-	rm -fr db
-	rm -fr incremental_db
+	rm -rf incremental_db
+	rm -rf db
+	rm -rf greybox_tmp
+	rm -rf build/*
+
+tags:
+	exuberant-ctags -Re
+
+.PHONY :compile
+
