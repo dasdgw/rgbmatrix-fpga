@@ -1,3 +1,23 @@
+quickstart:
+
+connect the rgbmatrix to the de0nano and the de0nano to your pc.
+The pinout is documented in 
+https://github.com/dasdgw/rgbmatrix-fpga/blob/master/de0-nano/de0_nano.vhd
+
+open a terminal and go to rgbmatrix-fpga/de0nano and run:
+make program start_server
+
+start processing and open one of the *.pde files in rgbmatrix-fpga/processing folder.
+Press the play button. done
+
+Note: in order to work quartus and processing have to be installed
+
+Sometimes I had problems accessing my de0nano with signaltap after running one of the
+processing sketches.
+The solutions was to kill quartus_stp and try it again.
+
+--------------------------------------------------------------------------------
+
 ################################################################
 #                                                              #
 #  Adafruit RGB LED Matrix Display Driver and Client Software  #
