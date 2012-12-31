@@ -29,20 +29,22 @@ use work.rgbmatrix_pkg.all;             -- Constants & Configuration
 
 entity rgbmatrix is
   port (
-    clk_in  : in  std_logic;
-    rst_n   : in  std_logic;
-    clk_out : out std_logic;
-    r1      : out std_logic;
-    r2      : out std_logic;
-    b1      : out std_logic;
-    b2      : out std_logic;
-    g1      : out std_logic;
-    g2      : out std_logic;
-    a       : out std_logic;
-    b       : out std_logic;
-    c       : out std_logic;
-    lat     : out std_logic;
-    oe      : out std_logic
+    clk_in   : in    std_logic;
+    rst_n    : in    std_logic;
+    clk_out  : out   std_logic;
+    r1       : out   std_logic;
+    r2       : out   std_logic;
+    b1       : out   std_logic;
+    b2       : out   std_logic;
+    g1       : out   std_logic;
+    g2       : out   std_logic;
+    a        : out   std_logic;
+    b        : out   std_logic;
+    c        : out   std_logic;
+    lat      : out   std_logic;
+    oe       : out   std_logic;
+    i2c_sdat : inout std_logic;
+    i2c_sclk : inout std_logic
     );
 end rgbmatrix;
 
@@ -86,20 +88,37 @@ begin
       oe          => oe,
       -- Connection with framebuffer
       addr        => addr,
-    --  data => x"FF0000FF0000"           -- too bright!
+      --  data => x"FF0000FF0000"           -- too bright!
 --      data => addr(0)& addr(0) & addr(0) & addr(0) & x"F00001F0000"
       data        => data_outgoing
       );
 
   -- Virtual JTAG interface
-  U_JTAGIFACE : entity work.jtag_iface
-    port map (
-      rst     => rst_p,
-      rst_out => jtag_rst_out,
-      output  => data_incoming,
-      valid   => data_valid,
-      tck     => tck
-      );
+  jtag_iface : if IFACE = "jtag" generate
+    U_JTAGIFACE : entity work.jtag_iface
+      port map (
+        rst     => rst_p,
+        rst_out => jtag_rst_out,
+        output  => data_incoming,
+        valid   => data_valid,
+        tck     => tck
+        );
+  end generate jtag_iface;
+
+  i2c_iface : if IFACE = "i2c" generate
+    i2c_iface_1 : entity work.i2c_iface
+      generic map (
+        SLAVE_ADDR => SLAVE_ADDR)       -- [std_logic_vector(6 downto 0)]
+      port map (
+        clk      => clk_in,             -- [in  std_logic]
+        rst      => rst_p,              -- [in  std_logic]
+        rst_out  => jtag_rst_out,       -- [out std_logic]
+        output   => data_incoming,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
+        valid    => data_valid,         -- [out std_logic]
+        i2c_sdat => i2c_sdat,           -- [inout std_logic]
+        i2c_sclk => i2c_sclk);          -- [inout std_logic]
+
+  end generate i2c_iface;
 
   -- Special memory for the framebuffer
   U_MEMORY : entity work.memory

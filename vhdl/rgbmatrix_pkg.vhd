@@ -23,25 +23,31 @@
 -- IN THE SOFTWARE.
 
 library ieee;
+use ieee.std_logic_1164.all;
 use ieee.math_real.log2;
 use ieee.math_real.ceil;
 
 package rgbmatrix_pkg is
-    
-    -- User configurable constants
-    constant NUM_PANELS   : integer := 1; -- total number of LED matrix panels
-    constant PIXEL_DEPTH  : integer := 8; -- number of bits per pixel
-    
-    -- Special constants (change these at your own risk, stuff might break!)
-    constant PANEL_WIDTH  : integer := 32; -- width of the panel in pixels
-    constant PANEL_HEIGHT : integer := 16; -- height of the panel in pixels
-    constant DATA_WIDTH   : positive := PIXEL_DEPTH*6;
-                                         -- one bit for each subpixel (3), times
-                                         -- the number of simultaneous lines (2)
-    
-    -- Derived constants
-    constant ADDR_WIDTH     : positive := positive(log2(real(NUM_PANELS*PANEL_WIDTH*PANEL_HEIGHT/2)));
-    constant IMG_WIDTH      : positive := PANEL_WIDTH*NUM_PANELS;
-    constant IMG_WIDTH_LOG2 : positive := positive(log2(real(IMG_WIDTH)));
-    
+-- choose interface for the rgbmatrix. posible values are jtag or i2c
+  constant IFACE       : string                       := "jtag";
+--  constant IFACE      : string                       := "i2c";
+  -- if you are using i2c you have to configure a slave address
+  constant SLAVE_ADDR : std_logic_vector(6 downto 0) := "1010101";
+
+-- User configurable constants
+  constant NUM_PANELS  : integer := 1;  -- total number of LED matrix panels
+  constant PIXEL_DEPTH : integer := 8;  -- number of bits per pixel
+
+  -- Special constants (change these at your own risk, stuff might break!)
+  constant PANEL_WIDTH  : integer  := 32;  -- width of the panel in pixels
+  constant PANEL_HEIGHT : integer  := 16;  -- height of the panel in pixels
+  constant DATA_WIDTH   : positive := PIXEL_DEPTH*6;
+                                           -- one bit for each subpixel (3), times
+                                           -- the number of simultaneous lines (2)
+
+  -- Derived constants
+  constant ADDR_WIDTH     : positive := positive(log2(real(NUM_PANELS*PANEL_WIDTH*PANEL_HEIGHT/2)));
+  constant IMG_WIDTH      : positive := PANEL_WIDTH*NUM_PANELS;
+  constant IMG_WIDTH_LOG2 : positive := positive(log2(real(IMG_WIDTH)));
+
 end rgbmatrix_pkg;

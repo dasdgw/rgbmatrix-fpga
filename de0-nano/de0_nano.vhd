@@ -91,25 +91,27 @@ entity de0_nano is
 end;
 
 architecture structural of de0_nano is
-  signal counter : unsigned(31 downto 0) := (others => '0');
-  signal clk     : std_logic             := '0';
-  signal clk_10MHz : std_logic:='0';
-  signal locked  : std_logic             := '0';
+  signal counter   : unsigned(31 downto 0) := (others => '0');
+  signal clk       : std_logic             := '0';
+  signal clk_10MHz : std_logic             := '0';
+  signal locked    : std_logic             := '0';
 
-  signal rst_n   : std_logic;           -- [in]
-  signal clk_out : std_logic;           -- [out]
-  signal r1      : std_logic;           -- [out]
-  signal r2      : std_logic;           -- [out]
-  signal b1      : std_logic;           -- [out]
-  signal b2      : std_logic;           -- [out]
-  signal g1      : std_logic;           -- [out]
-  signal g2      : std_logic;           -- [out]
-  signal a       : std_logic;           -- [out]
-  signal b       : std_logic;           -- [out]
-  signal c       : std_logic;           -- [out]
-  signal lat     : std_logic;           -- [out]
-  signal oe      : std_logic;           -- [out]
-
+  signal rst_n       : std_logic;       -- [in]
+  signal clk_out     : std_logic;       -- [out]
+  signal r1          : std_logic;       -- [out]
+  signal r2          : std_logic;       -- [out]
+  signal b1          : std_logic;       -- [out]
+  signal b2          : std_logic;       -- [out]
+  signal g1          : std_logic;       -- [out]
+  signal g2          : std_logic;       -- [out]
+  signal a           : std_logic;       -- [out]
+  signal b           : std_logic;       -- [out]
+  signal c           : std_logic;       -- [out]
+  signal lat         : std_logic;       -- [out]
+  signal oe          : std_logic;       -- [out]
+  signal i2c_sdat_ex : std_logic;
+  signal i2c_sclk_ex : std_logic;
+  
 begin  -- structural
 
   pll1_1 : entity work.pll1
@@ -117,32 +119,34 @@ begin  -- structural
       areset => '0',                    -- [IN  STD_LOGIC  := '0']
       inclk0 => CLOCK_50,               -- [IN  STD_LOGIC  := '0']
       c0     => clk,                    -- [OUT STD_LOGIC]
-      c1 => clk_10MHz,
+      c1     => clk_10MHz,
       locked => locked);                -- [OUT STD_LOGIC]process(CLOCK_50)
 
   rgbmatrix_1 : entity work.rgbmatrix
     port map (
-      clk_in  => clk_10MHz,                   -- [in  std_logic]
-      rst_n   => rst_n,                 -- [in  std_logic]
-      clk_out => clk_out,               -- [out std_logic]
-      r1      => r1,                    -- [out std_logic]
-      r2      => r2,                    -- [out std_logic]
-      b1      => b1,                    -- [out std_logic]
-      b2      => b2,                    -- [out std_logic]
-      g1      => g1,                    -- [out std_logic]
-      g2      => g2,                    -- [out std_logic]
-      a       => a,                     -- [out std_logic]
-      b       => b,                     -- [out std_logic]
-      c       => c,                     -- [out std_logic]
-      lat     => lat,                   -- [out std_logic]
-      oe      => oe);                   -- [out std_logic]
+      clk_in   => clk_10MHz,            -- [in  std_logic]
+      rst_n    => rst_n,                -- [in  std_logic]
+      clk_out  => clk_out,              -- [out std_logic]
+      r1       => r1,                   -- [out std_logic]
+      r2       => r2,                   -- [out std_logic]
+      b1       => b1,                   -- [out std_logic]
+      b2       => b2,                   -- [out std_logic]
+      g1       => g1,                   -- [out std_logic]
+      g2       => g2,                   -- [out std_logic]
+      a        => a,                    -- [out std_logic]
+      b        => b,                    -- [out std_logic]
+      c        => c,                    -- [out std_logic]
+      lat      => lat,                  -- [out std_logic]
+      oe       => oe,                   -- [out std_logic]
+      i2c_sdat => GPIO_1(0),--i2c_sdat_ex,          -- [inout std_logic]
+      i2c_sclk => GPIO_1(1));--i2c_sclk_ex);         -- [inout std_logic]
 
   rst_n <= locked;
 
 --  GPIO_0(33 downto 22) <= g1 & r1 & b1 & g2 & r2 & b2 & b & a & c & lat & clk_out & oe;
 
 --                        33     32      31   30  29  28   27   26   25   24   23  22
-  GPIO_0(33 downto 22) <= oe & clk_out & lat & c & a & b & b2 & r2 & g2 & b1 & r1 &g1; 
+  GPIO_0(33 downto 22) <= oe & clk_out & lat & c & a & b & b2 & r2 & g2 & b1 & r1 &g1;
   led_test : process(clk)
   begin
     if rising_edge(clk) then
