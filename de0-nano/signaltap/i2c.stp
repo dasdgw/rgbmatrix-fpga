@@ -1,0 +1,485 @@
+<session sof_file="../build/DE0_Nano.sof">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <position_info>
+      <single attribute="active tab" value="1"/>
+      <single attribute="setup vertical scroll position" value="0"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+    </position_info>
+    <signal_set global_temp="1" name="signal_set: 2012/12/31 17:38:46  #0">
+      <clock name="pll1:pll1_1|altpll:altpll_component|pll1_altpll:auto_generated|wire_pll1_clk[0]" polarity="posedge" tap_mode="probeonly"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="512" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[10]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[11]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[12]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[13]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[14]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[15]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[16]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[17]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[18]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[19]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[20]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[21]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[22]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[23]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[24]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[25]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[26]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[27]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[28]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[29]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[30]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[31]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[32]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[33]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[34]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[35]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[36]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[37]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[38]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[39]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[3]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[40]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[41]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[42]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[43]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[44]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[45]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[46]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[47]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[4]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[5]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[6]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[7]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[8]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[9]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.rst_out" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_oe" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_1" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_2" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_1" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_2" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ADDR" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.GET_DATA" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.IDLE" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.WAIT4IDLE" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid" tap_mode="classic" type="register"/>
+          <wire name="GPIO_1[0]" tap_mode="probeonly" type="bidir pin"/>
+          <wire name="GPIO_1[1]" tap_mode="probeonly" type="bidir pin"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[10]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[11]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[12]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[13]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[14]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[15]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[16]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[17]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[18]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[19]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[20]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[21]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[22]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[23]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[24]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[25]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[26]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[27]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[28]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[29]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[30]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[31]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[32]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[33]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[34]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[35]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[36]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[37]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[38]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[39]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[3]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[40]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[41]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[42]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[43]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[44]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[45]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[46]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[47]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[4]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[5]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[6]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[7]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[8]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[9]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.rst_out" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_oe" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_1" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_2" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_1" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_2" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ADDR" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.GET_DATA" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.IDLE" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.WAIT4IDLE" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid" tap_mode="classic" type="register"/>
+          <wire name="GPIO_1[0]" tap_mode="probeonly" type="bidir pin"/>
+          <wire name="GPIO_1[1]" tap_mode="probeonly" type="bidir pin"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[10]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[11]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[12]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[13]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[14]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[15]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[16]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[17]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[18]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[19]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[20]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[21]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[22]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[23]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[24]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[25]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[26]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[27]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[28]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[29]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[30]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[31]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[32]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[33]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[34]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[35]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[36]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[37]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[38]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[39]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[3]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[40]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[41]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[42]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[43]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[44]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[45]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[46]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[47]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[4]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[5]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[6]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[7]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[8]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[9]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.rst_out" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_oe" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[0]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[1]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[2]" tap_mode="classic" type="register"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_1" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_2" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_1" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_2" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ADDR" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.GET_DATA" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.IDLE" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.WAIT4IDLE" tap_mode="classic" type="state machine"/>
+          <wire name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid" tap_mode="classic" type="register"/>
+          <wire name="GPIO_1[0]" tap_mode="probeonly" type="bidir pin"/>
+          <wire name="GPIO_1[1]" tap_mode="probeonly" type="bidir pin"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <net is_signal_inverted="no" name="GPIO_1[1]"/>
+          <net is_signal_inverted="no" name="GPIO_1[0]"/>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid"/>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[3]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[47]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[46]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[45]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[44]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[43]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[42]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[41]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[40]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[39]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[38]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[37]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[36]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[35]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[34]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[33]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[32]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[31]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[30]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[29]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[28]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[27]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[26]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[25]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[24]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[23]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[22]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[21]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[20]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[19]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[18]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[17]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[16]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[15]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[14]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[13]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[12]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[11]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[10]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[9]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[8]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[7]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[6]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[5]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[4]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[3]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_oe"/>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat"/>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.rst_out"/>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state" order="lsb_to_msb" radix="hex" state="collapse" type="state machine">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_1"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_2"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_1"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_2"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ADDR"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.GET_DATA"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.IDLE"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.WAIT4IDLE"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <net is_signal_inverted="no" name="GPIO_1[1]"/>
+          <net is_signal_inverted="no" name="GPIO_1[0]"/>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid"/>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[3]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.bit_cnt[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.byte_cnt[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[47]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[46]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[45]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[44]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[43]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[42]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[41]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[40]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[39]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[38]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[37]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[36]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[35]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[34]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[33]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[32]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[31]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[30]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[29]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[28]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[27]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[26]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[25]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[24]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[23]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[22]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[21]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[20]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[19]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[18]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[17]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[16]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[15]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[14]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[13]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[12]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[11]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[10]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[9]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[8]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[7]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[6]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[5]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[4]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[3]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.data_in[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sclk_reg[0]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg" order="msb_to_lsb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[2]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[1]"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_reg[0]"/>
+          </bus>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat_oe"/>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.sdat"/>
+          <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.rst_out"/>
+          <bus is_signal_inverted="no" link="all" mnemonics="r.state_table" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state (1)" order="lsb_to_msb" state="collapse" type="state machine">
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_1"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_ADDR_2"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_1"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ACK_DATA_2"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.ADDR"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.GET_DATA"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.IDLE"/>
+            <net is_signal_inverted="no" name="rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.state.WAIT4IDLE"/>
+          </bus>
+        </setup_view>
+      </presentation>
+      <trigger attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2012/12/31 17:38:46  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="conditional" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>000000000000000000000000000000000000000000000000000000000000000000000000000
+            <pwr_up_transitional>000000000000000000000000000000000000000000000000000000000000000000000000000</pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+      </trigger>
+    </signal_set>
+  </instance>
+  <mnemonics>
+    <table name="r.state_table" width="8">
+      <symbol name="state.ACK_ADDR_1" value="00000001"/>
+      <symbol name="state.ACK_ADDR_2" value="00000010"/>
+      <symbol name="state.ACK_DATA_1" value="00000100"/>
+      <symbol name="state.ACK_DATA_2" value="00001000"/>
+      <symbol name="state.ADDR" value="00010000"/>
+      <symbol name="state.GET_DATA" value="00100000"/>
+      <symbol name="state.IDLE" value="01000000"/>
+      <symbol name="state.WAIT4IDLE" value="10000000"/>
+    </table>
+  </mnemonics>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="config widget visible" value="1"/>
+    <single attribute="data log widget visible" value="1"/>
+    <single attribute="hierarchy widget visible" value="1"/>
+    <single attribute="instance widget visible" value="1"/>
+    <single attribute="jtag widget visible" value="1"/>
+    <multi attribute="column width" size="23" value="34,34,415,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,78"/>
+    <multi attribute="frame size" size="2" value="1596,861"/>
+    <multi attribute="jtag widget size" size="2" value="362,126"/>
+  </global_info>
+  <static_plugin_mnemonics/>
+</session>
