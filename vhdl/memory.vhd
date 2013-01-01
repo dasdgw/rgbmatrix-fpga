@@ -56,7 +56,7 @@ begin
     next_waddr <= std_logic_vector( unsigned(waddr) + 1 );
     
     -- Write process for the memory
-    process(rst, clk_wr, next_waddr)
+    process(rst, clk_wr)
     begin
         if(rst = '1') then
             waddr <= (others => '0'); -- reset the write address to the beginning
