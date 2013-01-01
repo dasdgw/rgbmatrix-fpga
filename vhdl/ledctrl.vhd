@@ -86,7 +86,7 @@ begin
         s_led_addr <= (others => '1');  -- this inits to 111 because the led_addr is actually used *after* the incoming data is latched by the panel (not while being shifted in), so by then it has been "incremented" to 000
         s_ram_addr <= (others => '0');
         s_rgb1     <= (others => '0');
-        s_rgb2     <= (others => '0');        
+        s_rgb2     <= (others => '0');
       else
         state      <= next_state;
         col_count  <= next_col_count;
@@ -107,8 +107,8 @@ begin
     variable lower_r, lower_g, lower_b : unsigned(PIXEL_DEPTH-1 downto 0);
     variable r1, g1, b1, r2, g2, b2    : std_logic;
   begin
-    
-  
+
+
     -- Default register next-state assignments
     next_col_count <= col_count;
     next_bpp_count <= bpp_count;
@@ -117,15 +117,28 @@ begin
     next_rgb1      <= s_rgb1;
     next_rgb2      <= s_rgb2;
 
-r1:=s_rgb1(2);
-g1:=s_rgb1(1);
-b1:=s_rgb1(0);
-r2:=s_rgb2(2);
-g2:=s_rgb2(1);
-b2:=s_rgb2(0);
-    
+    r1 := s_rgb1(2);
+    g1 := s_rgb1(1);
+    b1 := s_rgb1(0);
+    r2 := s_rgb2(2);
+    g2 := s_rgb2(1);
+    b2 := s_rgb2(0);
 
-
+    -- Pixel data is given as 2 combined words, with the upper half containing
+    -- the upper pixel and the lower half containing the lower pixel. Inside
+    -- each half the pixel data is encoded in RGB order with multiple repeated
+    -- bits for each subpixel depending on the chosen color depth. For example,
+    -- a PIXEL_DEPTH of 3 results in a 18-bit word arranged RRRGGGBBBrrrgggbbb.
+    -- The following assignments break up this encoding into the human-readable
+    -- signals used above, or reconstruct it into LED data signals.
+    upper   := unsigned(data(DATA_WIDTH-1 downto DATA_WIDTH/2));
+    lower   := unsigned(data(DATA_WIDTH/2-1 downto 0));
+    upper_r := upper(3*PIXEL_DEPTH-1 downto 2*PIXEL_DEPTH);
+    upper_g := upper(2*PIXEL_DEPTH-1 downto PIXEL_DEPTH);
+    upper_b := upper(PIXEL_DEPTH-1 downto 0);
+    lower_r := lower(3*PIXEL_DEPTH-1 downto 2*PIXEL_DEPTH);
+    lower_g := lower(2*PIXEL_DEPTH-1 downto PIXEL_DEPTH);
+    lower_b := lower(PIXEL_DEPTH-1 downto 0);
 
 -- Default signal assignments
     s_clk_out <= '0';
@@ -144,8 +157,8 @@ b2:=s_rgb2(0);
         end if;
         next_state <= READ_PIXEL_DATA;
       when READ_PIXEL_DATA =>
-  r1 := '0'; g1 := '0'; b1 := '0';    -- Defaults
-    r2 := '0'; g2 := '0'; b2 := '0';    -- Defaults
+        r1 := '0'; g1 := '0'; b1 := '0';  -- Defaults
+        r2 := '0'; g2 := '0'; b2 := '0';  -- Defaults
 
         s_oe <= '0';                    -- enable display
         -- Do parallel comparisons against BPP counter to gain multibit color
@@ -167,22 +180,25 @@ b2:=s_rgb2(0);
         if(lower_b > bpp_count) then
           b2 := '1';
         end if;
-        next_col_count <= col_count + 1;    -- update/increment column counter
+
         if(col_count < IMG_WIDTH) then  -- check if at the rightmost side of the image
-          next_state <= INCR_RAM_ADDR;
+          next_state     <= INCR_RAM_ADDR;
+          next_ram_addr  <= std_logic_vector(unsigned(s_ram_addr) + 1);
+          next_col_count <= col_count + 1;  -- update/increment column counter
         else
-          next_state <= INCR_LED_ADDR;
+          next_state     <= INCR_LED_ADDR;
+          next_col_count <= (others => '0');  -- reset the column counter
         end if;
       when INCR_RAM_ADDR =>
-        s_clk_out     <= '1';           -- pulse the output clock
-        s_oe          <= '0';           -- enable display
-        next_ram_addr <= std_logic_vector(unsigned(s_ram_addr) + 1);
-        next_state    <= READ_PIXEL_DATA;
+        s_clk_out  <= '1';              -- pulse the output clock
+        s_oe       <= '0';              -- enable display
+--        next_ram_addr <= std_logic_vector(unsigned(s_ram_addr) + 1);
+        next_state <= READ_PIXEL_DATA;
       when INCR_LED_ADDR =>
         -- display is disabled during led_addr (select lines) update
-        next_led_addr  <= std_logic_vector(unsigned(s_led_addr) + 1);
-        next_col_count <= (others => '0');  -- reset the column counter
-        next_state     <= LATCH;
+        next_led_addr <= std_logic_vector(unsigned(s_led_addr) + 1);
+
+        next_state <= LATCH;
       when LATCH =>
         -- display is disabled during latching
         s_lat      <= '1';              -- latch the data
@@ -190,21 +206,6 @@ b2:=s_rgb2(0);
       when others => null;
     end case;
 
-    -- Pixel data is given as 2 combined words, with the upper half containing
-    -- the upper pixel and the lower half containing the lower pixel. Inside
-    -- each half the pixel data is encoded in RGB order with multiple repeated
-    -- bits for each subpixel depending on the chosen color depth. For example,
-    -- a PIXEL_DEPTH of 3 results in a 18-bit word arranged RRRGGGBBBrrrgggbbb.
-    -- The following assignments break up this encoding into the human-readable
-    -- signals used above, or reconstruct it into LED data signals.
-    upper     := unsigned(data(DATA_WIDTH-1 downto DATA_WIDTH/2));
-    lower     := unsigned(data(DATA_WIDTH/2-1 downto 0));
-    upper_r   := upper(3*PIXEL_DEPTH-1 downto 2*PIXEL_DEPTH);
-    upper_g   := upper(2*PIXEL_DEPTH-1 downto PIXEL_DEPTH);
-    upper_b   := upper(PIXEL_DEPTH-1 downto 0);
-    lower_r   := lower(3*PIXEL_DEPTH-1 downto 2*PIXEL_DEPTH);
-    lower_g   := lower(2*PIXEL_DEPTH-1 downto PIXEL_DEPTH);
-    lower_b   := lower(PIXEL_DEPTH-1 downto 0);
     next_rgb1 <= r1 & g1 & b1;
     next_rgb2 <= r2 & g2 & b2;
     
