@@ -11,9 +11,6 @@ detect:
 compile:
 	quartus_sh --flow compile DE0_Nano -c DE0_Nano
 
-sim_i2c_iface:
-	./sim_i2c_iface.sh
-
 clean:
 	rm -rf incremental_db
 	rm -rf db
