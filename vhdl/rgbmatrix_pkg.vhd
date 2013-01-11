@@ -29,8 +29,8 @@ use ieee.math_real.ceil;
 
 package rgbmatrix_pkg is
 -- choose interface for the rgbmatrix. posible values are jtag or i2c
-  constant IFACE       : string                       := "jtag";
---  constant IFACE      : string                       := "i2c";
+--  constant IFACE       : string                       := "jtag";
+  constant IFACE      : string                       := "i2c";
   -- if you are using i2c you have to configure a slave address
   constant SLAVE_ADDR : std_logic_vector(6 downto 0) := "1010101";
 
