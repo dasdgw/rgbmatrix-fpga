@@ -62,6 +62,7 @@ architecture bhv of i2c_iface is
     rst_out  : std_logic;
     startbit : std_logic;
     stopbit  : std_logic;
+    nack     : std_logic;
   end record i2c_reg_type;
 
   signal r, rin : i2c_reg_type;
@@ -78,6 +79,7 @@ begin
     v.sclk_reg := r.sclk_reg(1 downto 0) & i2c_sclk;
     v.valid    := '0';
     v.rst_out  := '0';
+    v.nack     := '0';
 
     if r.sdat_reg(2 downto 1) = "10" and r.sclk_reg(2 downto 1) = "11" then
       v.startbit := '1';
@@ -119,6 +121,7 @@ begin
             -- todo drive sda low, to ack the addr?
             v.state := ACK_ADDR_1;
           else
+            v.nack  := '1';
             v.state := WAIT4IDLE;
           end if;
         end if;
