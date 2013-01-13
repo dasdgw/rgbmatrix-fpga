@@ -105,6 +105,9 @@ begin  -- architecture testbench
       i2c_sclk <= '1';
       wait for 5 us;
       i2c_sclk <= '0';
+      wait for 50 ns;
+      assert not (i2c_sdat = '0' and addr = "1010000") severity failure;
+      assert not (i2c_sdat = 'Z' and not addr = "1010000") severity failure;
       for i in data'range loop
         i2c_sdat <= data(i);
         wait for 5 us;
@@ -120,6 +123,7 @@ begin  -- architecture testbench
           i2c_sclk <= '1';
           wait for 5 us;
           i2c_sclk <= '0';
+          assert i2c_sdat = 'Z' severity failure;
         end if;
       end loop;  -- i
       report "stop";
