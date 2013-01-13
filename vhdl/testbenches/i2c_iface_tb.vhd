@@ -80,12 +80,12 @@ begin  -- architecture testbench
       i2c_sdat <= '1';
       i2c_sclk <= '1';
       wait for 50 us;
-      -- start
+      report "start";
       i2c_sdat <= '0';
       wait for 10 us;
       i2c_sclk <= '0';
       wait for 10 us;
-      -- sent address
+      report "send address";
       for i in addr'range loop
         i2c_sdat <= addr(i);
         wait for 5 us;
@@ -93,13 +93,13 @@ begin  -- architecture testbench
         wait for 5 us;
         i2c_sclk <= '0';
       end loop;  -- i
-      --write_cmd
+      report "write_cmd";
       i2c_sdat <= '0';
       wait for 5 us;
       i2c_sclk <= '1';
       wait for 5 us;
       i2c_sclk <= '0';
--- ignore if slave sents an ack
+      report "ignore if slave sends an ack";
       i2c_sdat <= 'Z';
       wait for 5 us;
       i2c_sclk <= '1';
@@ -114,7 +114,7 @@ begin  -- architecture testbench
         bit_cnt  := bit_cnt+1;
         if bit_cnt = 8 then
           bit_cnt  := 0;
--- ignore if slave sents an ack
+          report "ignore if slave sents an ack";
           i2c_sdat <= 'Z';
           wait for 5 us;
           i2c_sclk <= '1';
@@ -122,12 +122,12 @@ begin  -- architecture testbench
           i2c_sclk <= '0';
         end if;
       end loop;  -- i
-      -- stop
+      report "stop";
       i2c_sdat <= '0';
       wait for 10 us;
       i2c_sclk <= '1';
       wait for 10 us;
-      -- idle
+      report "idle";
       i2c_sdat <= '1';
       i2c_sclk <= '1';
       wait for 50 us;
