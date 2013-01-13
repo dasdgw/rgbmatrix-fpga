@@ -104,7 +104,7 @@ begin  -- structural
 --  GPIO_0(33 downto 22) <= g1 & r1 & b1 & g2 & r2 & b2 & b & a & c & lat & clk_out & oe;
 
 --                        33     32      31   30  29  28   27   26   25   24   23  22
-  GPIO_0(33 downto 22) <= oe & clk_out & lat & c & a & b & b2 & r2 & g2 & b1 & r1 &g1;
+  GPIO_0(33 downto 22) <= oe & clk_out & lat & c & a & b & b1 & r1 & g1 & b2 & r2 &g2;
   led_test : process(clk)
   begin
     if rising_edge(clk) then
