@@ -10,8 +10,8 @@ create_clock -period 20 [get_ports CLOCK_50]
 
 create_clock -name {rgbmatrix:rgbmatrix_1|ledctrl:U_LEDCTRL|clk_div:U_CLKDIV|clk_out} -period 100.000 [get_ports {GPIO_0[32]}]
 
-create_clock -name {rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid} \
--period 100.000 [get_keepers {rgbmatrix:rgbmatrix_1|i2c_iface:\i2c_iface:i2c_iface_1|r.valid}]
+create_clock -name {rgbmatrix:rgbmatrix_1|i2c_iface:\i2c:i2c_iface_1|r.valid} \
+-period 100.000 [get_keepers {rgbmatrix:rgbmatrix_1|i2c_iface:\i2c:i2c_iface_1|r.valid}]
 #**************************************************************
 # Create Generated Clock
 #**************************************************************
