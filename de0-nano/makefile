@@ -1,24 +1,27 @@
+# if you don't have 64bit Quartus installed comment the following line 
+64BIT = --64bit
+
 program:
-	quartus_pgm -m jtag -c 1 -o "p;build/DE0_Nano.sof"
+	quartus_pgm $(64BIT) -m jtag -c 1 -o "p;build/DE0_Nano.sof"
 #	quartus_pgm -m jtag -c USB-Blaster[USB-0] -o "p;build/DE0_Nano.sof"
 
 start_server:
-	quartus_stp -t ../tcl/vjtag_server.tcl &
+	quartus_stp $(64BIT) -t ../tcl/vjtag_server.tcl &
 
 detect:
-	linux32 quartus_pgm -c 1 -a
+	quartus_pgm $(64BIT) -c 1 -a
 
 compile:
-	quartus_sh --flow compile DE0_Nano -c DE0_Nano
+	quartus_sh $(64BIT) --flow compile DE0_Nano -c DE0_Nano
 
 convert_flash:
-	quartus_cpf -c de0nano.cof
+	quartus_cpf $(64BIT) -c de0nano.cof
 
 program_flash:
-	quartus_pgm -c 1 de0nano.cdf
+	quartus_pgm $(64BIT) -c 1 de0nano.cdf
 
 quartus:
-	quartus DE0_Nano.qpf
+	quartus $(64BIT) DE0_Nano.qpf
 clean:
 	rm -rf incremental_db
 	rm -rf db
