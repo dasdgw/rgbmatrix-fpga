@@ -56,10 +56,10 @@ architecture str of rgbmatrix is
   signal addr          : std_logic_vector(ADDR_WIDTH-1 downto 0);
   signal data_incoming : std_logic_vector(DATA_WIDTH-1 downto 0);
   signal data_outgoing : std_logic_vector(DATA_WIDTH-1 downto 0);
-
+  signal rgb           : std_logic_vector(DATA_WIDTH/2-1 downto 0);
   -- Flags
-  signal data_valid : std_logic;
-  signal tck        : std_logic;
+  signal data_valid    : std_logic;
+  signal tck           : std_logic;
 begin
 
   -- Reset button is an "active low" input, invert it so we can treat is as
@@ -94,7 +94,7 @@ begin
       );
 
   -- Virtual JTAG interface
-  jtag_iface : if IFACE = "jtag" generate
+  jtag : if IFACE = "jtag" generate
     U_JTAGIFACE : entity work.jtag_iface
       port map (
         rst     => rst_p,
@@ -103,9 +103,23 @@ begin
         valid   => data_valid,
         tck     => tck
         );
-  end generate jtag_iface;
 
-  i2c_iface : if IFACE = "i2c" generate
+    -- Special memory for the framebuffer
+    jtag_memory : entity work.jtag_memory
+      port map (
+        rst    => rst,
+        -- Writing side
+        clk_wr => data_valid,
+        input  => data_incoming,
+        -- Reading side
+        clk_rd => clk_in,
+        addr   => addr,
+        output => data_outgoing
+        );
+
+  end generate jtag;
+
+  i2c : if IFACE = "i2c" generate
     i2c_iface_1 : entity work.i2c_iface
       generic map (
         SLAVE_ADDR => SLAVE_ADDR)       -- [std_logic_vector(6 downto 0)]
@@ -113,24 +127,26 @@ begin
         clk      => clk_in,             -- [in  std_logic]
         rst      => rst_p,              -- [in  std_logic]
         rst_out  => jtag_rst_out,       -- [out std_logic]
-        output   => data_incoming,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
+        output   => rgb,  --data_incoming,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
         valid    => data_valid,         -- [out std_logic]
         i2c_sdat => i2c_sdat,           -- [inout std_logic]
         i2c_sclk => i2c_sclk);          -- [inout std_logic]
 
-  end generate i2c_iface;
+    -- Special memory for the framebuffer
+    i2c_memory_1 : entity work.i2c_memory
+      port map (
+        rst    => rst,
+        -- Writing side
+        clk_wr => clk_in,
+        wr     => data_valid,
+        input  => rgb,                  --data_incoming,
+        -- Reading side
+        clk_rd => clk_in,
+        addr   => addr,
+        output => data_outgoing
+        );
 
-  -- Special memory for the framebuffer
-  U_MEMORY : entity work.memory
-    port map (
-      rst    => rst,
-      -- Writing side
-      clk_wr => data_valid,
-      input  => data_incoming,
-      -- Reading side
-      clk_rd => clk_in,
-      addr   => addr,
-      output => data_outgoing
-      );
+  end generate i2c;
+
 
 end str;

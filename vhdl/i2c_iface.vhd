@@ -38,7 +38,7 @@ entity i2c_iface is
     clk      : in    std_logic;
     rst      : in    std_logic;
     rst_out  : out   std_logic;
-    output   : out   std_logic_vector(DATA_WIDTH-1 downto 0);
+    output   : out   std_logic_vector(DATA_WIDTH/2-1 downto 0);
     valid    : out   std_logic;
     i2c_sdat : inout std_logic;
     i2c_sclk : inout std_logic
@@ -55,7 +55,7 @@ architecture bhv of i2c_iface is
     sclk_reg : std_logic_vector(2 downto 0);  -- cdc and edge reg
     sdat     : std_logic;
     sdat_oe  : std_logic;
-    data_in  : std_logic_vector(DATA_WIDTH-1 downto 0);
+    data_in  : std_logic_vector(DATA_WIDTH/2-1 downto 0);
     bit_cnt  : integer range 0 to 8;
     byte_cnt : integer range 0 to DATA_WIDTH/8;
     valid    : std_logic;
@@ -71,7 +71,7 @@ begin
   i2c_sdat <= r.sdat when r.sdat_oe = '1' else 'Z';
   i2c_sclk <= 'Z';
 
-  i2c_comb : process (r, i2c_sdat, i2c_sclk) is
+  i2c_comb : process (r, rst, i2c_sdat, i2c_sclk) is
     variable v : i2c_reg_type;
   begin  -- process i2c_comb
     v          := r;
@@ -148,10 +148,6 @@ begin
             --inc byte_cnt
             v.byte_cnt := r.byte_cnt+1;
             v.state    := ACK_DATA_1;
-            if v.byte_cnt = 6 then
-              v.byte_cnt := 0;
-              v.valid    := '1';
-            end if;
           end if;
         -- stop from master
         elsif r.sclk_reg(2 downto 1) = "11" and r.sdat_reg(2 downto 1) = "01" then
@@ -163,6 +159,11 @@ begin
           v.sdat_oe := '1';
           v.state   := ACK_DATA_2;
         end if;
+        if r.byte_cnt = 3 then
+          v.byte_cnt := 0;
+          v.valid    := '1';
+        end if;
+        
       when ACK_DATA_2 =>
         if r.sclk_reg(2 downto 1) = "10" then
           v.sdat_oe := '0';
@@ -170,6 +171,10 @@ begin
         end if;
       when others => null;
     end case;
+
+    if rst = '1' then
+      v.state := WAIT4IDLE;
+    end if;
 
     output  <= r.data_in;
     valid   <= r.valid;
@@ -180,11 +185,11 @@ begin
   reg : process (clk) is
   begin  -- process reg
     if rising_edge(clk) then
-      if rst = '1' then
-        r.state <= WAIT4IDLE;
-      else
-        r <= rin;
-      end if;
+      --if rst = '1' then
+      --  r.state <= WAIT4IDLE;
+      --else
+      r <= rin;
+--      end if;
     end if;
   end process reg;
 

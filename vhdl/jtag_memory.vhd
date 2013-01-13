@@ -32,7 +32,7 @@ use ieee.std_logic_unsigned.all;
 
 use work.rgbmatrix_pkg.all;
 
-entity memory is
+entity jtag_memory is
     port (
         rst    : in  std_logic;
         clk_wr : in  std_logic;
@@ -41,9 +41,9 @@ entity memory is
         addr   : in  std_logic_vector(ADDR_WIDTH-1 downto 0);
         output : out std_logic_vector(DATA_WIDTH-1 downto 0)
     );
-end memory;
+end jtag_memory;
 
-architecture bhv of memory is
+architecture bhv of jtag_memory is
     -- Internal signals
     signal waddr, next_waddr : std_logic_vector(ADDR_WIDTH-1 downto 0);
     
