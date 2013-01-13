@@ -37,6 +37,7 @@ entity i2c_memory is
     rst    : in  std_logic;
     clk_wr : in  std_logic;
     wr     : in  std_logic;
+    waddr  : in  std_logic_vector(ADDR_WIDTH downto 0);
     input  : in  std_logic_vector(DATA_WIDTH/2-1 downto 0);
     clk_rd : in  std_logic;
     addr   : in  std_logic_vector(ADDR_WIDTH-1 downto 0);
@@ -46,7 +47,7 @@ end i2c_memory;
 
 architecture bhv of i2c_memory is
   -- Internal signals
-  signal waddr, next_waddr : std_logic_vector(ADDR_WIDTH downto 0);
+--  signal waddr, next_waddr : std_logic_vector(ADDR_WIDTH downto 0);
 
   -- Inferred RAM storage signal
   type ram is array(2**ADDR_WIDTH-1 downto 0) of std_logic_vector(DATA_WIDTH/2-1 downto 0);
@@ -54,7 +55,7 @@ architecture bhv of i2c_memory is
 begin
 
   -- Create an adder to calculate the next write address
-  next_waddr <= std_logic_vector(unsigned(waddr) + 1);
+  --next_waddr <= std_logic_vector(unsigned(waddr) + 1);
 
   -- Write process for the memory
   process(clk_wr)
@@ -63,11 +64,11 @@ begin
       if wr = '1' then
         -- store input at the current write address
         if waddr(waddr'high) = '0' then
-          ram_block1(conv_integer(waddr(waddr'high-1 downto 0))) <= input;--(DATA_WIDTH/2-1 downto 0);
+          ram_block1(conv_integer(waddr(waddr'high-1 downto 0))) <= input;  --(DATA_WIDTH/2-1 downto 0);
         else
-          ram_block2(conv_integer(waddr(waddr'high-1 downto 0))) <= input;--(DATA_WIDTH-1 downto DATA_WIDTH/2);
+          ram_block2(conv_integer(waddr(waddr'high-1 downto 0))) <= input;  --(DATA_WIDTH-1 downto DATA_WIDTH/2);
         end if;
-        waddr <= next_waddr;  -- allow the write address to increment    
+--        waddr <= next_waddr;  -- allow the write address to increment    
       end if;
     end if;
   end process;

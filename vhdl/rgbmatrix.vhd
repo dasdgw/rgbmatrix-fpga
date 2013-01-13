@@ -57,7 +57,8 @@ architecture str of rgbmatrix is
   signal data_incoming : std_logic_vector(DATA_WIDTH-1 downto 0);
   signal data_outgoing : std_logic_vector(DATA_WIDTH-1 downto 0);
   signal rgb           : std_logic_vector(DATA_WIDTH/2-1 downto 0);
-  -- Flags
+  signal waddr         : std_logic_vector(ADDR_WIDTH downto 0);
+-- Flags
   signal data_valid    : std_logic;
   signal tck           : std_logic;
 begin
@@ -127,6 +128,7 @@ begin
         clk      => clk_in,             -- [in  std_logic]
         rst      => rst_p,              -- [in  std_logic]
         rst_out  => jtag_rst_out,       -- [out std_logic]
+        waddr    => waddr,  -- [out std_logic_vector(ADDR_WIDTH downto 0)]
         output   => rgb,  --data_incoming,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
         valid    => data_valid,         -- [out std_logic]
         i2c_sdat => i2c_sdat,           -- [inout std_logic]
@@ -139,6 +141,7 @@ begin
         -- Writing side
         clk_wr => clk_in,
         wr     => data_valid,
+        waddr  => waddr,
         input  => rgb,                  --data_incoming,
         -- Reading side
         clk_rd => clk_in,

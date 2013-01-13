@@ -38,6 +38,7 @@ entity i2c_iface is
     clk      : in    std_logic;
     rst      : in    std_logic;
     rst_out  : out   std_logic;
+    waddr    : out   std_logic_vector(ADDR_WIDTH downto 0);
     output   : out   std_logic_vector(DATA_WIDTH/2-1 downto 0);
     valid    : out   std_logic;
     i2c_sdat : inout std_logic;
@@ -46,7 +47,7 @@ entity i2c_iface is
 end i2c_iface;
 
 architecture bhv of i2c_iface is
-  type I2C_STATES is (WAIT4IDLE, IDLE, ADDR, ACK_ADDR_1, ACK_ADDR_2, GET_DATA, ACK_DATA_1, ACK_DATA_2);
+  type I2C_STATES is (RESET, WAIT4IDLE, IDLE, ADDR, ACK_ADDR_1, ACK_ADDR_2, GET_DATA, ACK_DATA_1, ACK_DATA_2);
 
 
   type i2c_reg_type is record
@@ -63,6 +64,7 @@ architecture bhv of i2c_iface is
     startbit : std_logic;
     stopbit  : std_logic;
     nack     : std_logic;
+    waddr    : unsigned(ADDR_WIDTH downto 0);
   end record i2c_reg_type;
 
   signal r, rin : i2c_reg_type;
@@ -95,6 +97,9 @@ begin
 
 
     case r.state is
+      when RESET =>
+        v.waddr := (others => '0');
+        v.state := WAIT4IDLE;
       when WAIT4IDLE =>
         --wait until sda and sclk are high
         if r.sdat_reg(2 downto 1) = "11" and r.sclk_reg(2 downto 1) = "11" then
@@ -168,17 +173,22 @@ begin
         if r.sclk_reg(2 downto 1) = "10" then
           v.sdat_oe := '0';
           v.state   := GET_DATA;
+          if r.byte_cnt = 0 then
+            v.waddr := r.waddr+1;
+          end if;
         end if;
+
       when others => null;
     end case;
 
     if rst = '1' then
-      v.state := WAIT4IDLE;
+      v.state := RESET;
     end if;
 
     output  <= r.data_in;
     valid   <= r.valid;
     rst_out <= r.rst_out;
+    waddr   <= std_logic_vector(r.waddr);
     rin     <= v;
   end process i2c_comb;
 
