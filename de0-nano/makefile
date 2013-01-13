@@ -11,6 +11,14 @@ detect:
 compile:
 	quartus_sh --flow compile DE0_Nano -c DE0_Nano
 
+convert_flash:
+	quartus_cpf -c de0nano.cof
+
+program_flash:
+	quartus_pgm -c 1 de0nano.cdf
+
+quartus:
+	quartus DE0_Nano.qpf
 clean:
 	rm -rf incremental_db
 	rm -rf db
