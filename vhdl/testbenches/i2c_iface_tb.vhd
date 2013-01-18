@@ -106,21 +106,25 @@ begin  -- architecture testbench
       report "ignore if slave sends an ack";
       i2c_clk('Z');
       wait for 50 ns;
-      for i in data'range loop
-        i2c_clk(data(i));
-        bit_cnt  := bit_cnt+1;
-        if bit_cnt = 8 then
-          bit_cnt  := 0;
-          report "ignore if slave sents an ack";
-          i2c_clk('Z');
-          assert i2c_sdat = 'Z' report "no slave has acked the data" severity warning;
-        end if;
-      end loop;  -- i
       -- if right address expect acknowledge '0'
       assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
       -- if wrong address expect not acknowledge 'Z'
       assert not (not addr = SLAVE_ADDR and not i2c_sdat = 'Z') severity failure;
       -- only send data if valid address is used
+      if addr = SLAVE_ADDR then
+        for i in data'range loop
+          report "sending data";
+          i2c_clk(data(i));
+          bit_cnt  := bit_cnt+1;
+          if bit_cnt = 8 then
+            bit_cnt  := 0;
+            report "get ack/nack data from slave";
+            i2c_clk('Z');
+            wait for 50 ns;
+            assert i2c_sdat = 'Z' report "no slave has acked the data" severity warning;
+          end if;
+        end loop;  -- i
+      end if;
       report "stop";
       i2c_sdat <= '0';
       wait for 10 us;
