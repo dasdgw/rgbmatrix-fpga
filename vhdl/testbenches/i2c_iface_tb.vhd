@@ -145,16 +145,16 @@ begin  -- architecture testbench
   begin
     report "start i2c simulation: ..." severity note;
     -- insert signal assignments here
-    i2c_write("1010101", x"AA");
     report "TC0: write 0xAA to the slave address" severity note;
+    i2c_write(SLAVE_ADDR, x"AA");
     wait for 100 us;
     report "TC1: write 0xAA to the wrong slave address. no one should ack the address." severity note;
-    i2c_write("1010000", x"AA");
+    i2c_write((not SLAVE_ADDR), x"AA");
     wait for 100 us;
 --    i2c_write("1010101", x"AA");
 --    wait for 100 us;
-    i2c_write("1010101", x"AAAAAA");
     report "TC2: write 0xAAAAAA to the slave address" severity note;
+    i2c_write(SLAVE_ADDR, x"AAAAAA");
     wait until clk = '1';
   end process WaveGen_Proc;
 
