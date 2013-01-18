@@ -6,7 +6,7 @@
 -- Author     :   <dasdgw@karel.dhcp.heaven>
 -- Company    : frankalicious
 -- Created    : 2012-12-29
--- Last update: 2013-01-13
+-- Last update: 2013-01-18
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -67,6 +67,14 @@ begin  -- architecture testbench
   -- waveform generation
   WaveGen_Proc : process
 
+    procedure i2c_clk(period:in time:=10 us) is
+    begin
+      wait for period/2;
+      i2c_sclk <= '1';
+      wait for period/2;
+      i2c_sclk <= '0';
+    end procedure i2c_clk;
+
 -- purpose: i2c write
 --example:     i2c_write("1010000", x"00000003");
     procedure i2c_write (
@@ -75,8 +83,6 @@ begin  -- architecture testbench
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
     begin
---      report "pupu";                    -- idle
---      assert false report"pupu2.0" severity warning;
       i2c_sdat <= '1';
       i2c_sclk <= '1';
       wait for 50 us;
@@ -88,42 +94,27 @@ begin  -- architecture testbench
       report "send address";
       for i in addr'range loop
         i2c_sdat <= addr(i);
-        wait for 5 us;
-        i2c_sclk <= '1';
-        wait for 5 us;
-        i2c_sclk <= '0';
+        i2c_clk;
       end loop;  -- i
       report "write_cmd";
       i2c_sdat <= '0';
-      wait for 5 us;
-      i2c_sclk <= '1';
-      wait for 5 us;
-      i2c_sclk <= '0';
+      i2c_clk;
       report "ignore if slave sends an ack";
       i2c_sdat <= 'Z';
-      wait for 5 us;
-      i2c_sclk <= '1';
-      wait for 5 us;
-      i2c_sclk <= '0';
+      i2c_clk;
       wait for 50 ns;
       assert not (i2c_sdat = '0' and addr = "1010000") severity failure;
       assert not (i2c_sdat = 'Z' and not addr = "1010000") severity failure;
       for i in data'range loop
         i2c_sdat <= data(i);
-        wait for 5 us;
-        i2c_sclk <= '1';
-        wait for 5 us;
-        i2c_sclk <= '0';
+        i2c_clk;
         bit_cnt  := bit_cnt+1;
         if bit_cnt = 8 then
           bit_cnt  := 0;
           report "ignore if slave sents an ack";
           i2c_sdat <= 'Z';
-          wait for 5 us;
-          i2c_sclk <= '1';
-          wait for 5 us;
-          i2c_sclk <= '0';
-          assert i2c_sdat = 'Z' severity failure;
+          i2c_clk;
+          assert i2c_sdat = 'Z' report "no slave has acked the data" severity warning;
         end if;
       end loop;  -- i
       report "stop";
