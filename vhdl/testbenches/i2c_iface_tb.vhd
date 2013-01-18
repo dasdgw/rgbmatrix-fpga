@@ -67,8 +67,14 @@ begin  -- architecture testbench
   -- waveform generation
   WaveGen_Proc : process
 
-    procedure i2c_clk(period:in time:=10 us) is
+-- purpose: set i2c_sdat to 'data' and generate i2c_sclk
+-- one clock pulse is generated for each bit transfered
+-- aka bit transfer
+-- examples: i2c_clk('0'); -- period defaults to 10 us
+    procedure i2c_clk(data   : in std_logic := 'Z';
+                      period : in time      := 10 us) is
     begin
+      i2c_sdat <= data;
       wait for period/2;
       i2c_sclk <= '1';
       wait for period/2;
@@ -93,27 +99,22 @@ begin  -- architecture testbench
       wait for 10 us;
       report "send address";
       for i in addr'range loop
-        i2c_sdat <= addr(i);
-        i2c_clk;
+        i2c_clk(addr(i));
       end loop;  -- i
       report "write_cmd";
-      i2c_sdat <= '0';
-      i2c_clk;
+       i2c_clk('0');
       report "ignore if slave sends an ack";
-      i2c_sdat <= 'Z';
-      i2c_clk;
+      i2c_clk('Z');
       wait for 50 ns;
       assert not (i2c_sdat = '0' and addr = "1010000") severity failure;
       assert not (i2c_sdat = 'Z' and not addr = "1010000") severity failure;
       for i in data'range loop
-        i2c_sdat <= data(i);
-        i2c_clk;
+        i2c_clk(data(i));
         bit_cnt  := bit_cnt+1;
         if bit_cnt = 8 then
           bit_cnt  := 0;
           report "ignore if slave sents an ack";
-          i2c_sdat <= 'Z';
-          i2c_clk;
+          i2c_clk('Z');
           assert i2c_sdat = 'Z' report "no slave has acked the data" severity warning;
         end if;
       end loop;  -- i
