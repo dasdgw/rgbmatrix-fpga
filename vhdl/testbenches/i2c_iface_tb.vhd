@@ -103,7 +103,7 @@ begin  -- architecture testbench
       end loop;  -- i
       report "write_cmd";
        i2c_clk('0');
-      report "ignore if slave sends an ack";
+      report "get ack/nack address from slave";
       i2c_clk('Z');
       wait for 50 ns;
       -- if right address expect acknowledge '0'
