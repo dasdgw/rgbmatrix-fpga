@@ -6,7 +6,7 @@
 -- Author     :   <dasdgw@karel.dhcp.heaven>
 -- Company    : frankalicious
 -- Created    : 2012-12-29
--- Last update: 2013-01-18
+-- Last update: 2013-01-19
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -90,6 +90,38 @@ begin  -- architecture testbench
       i2c_sclk <= '0';
     end procedure i2c_clk;
 
+-- purpose: send i2c_start
+-- examples: i2c_start(); -- period defaults to 20 us
+    procedure i2c_start(period : in time := 20 us) is
+    begin
+      report "start";
+      i2c_sdat <= '0';
+      wait for period/2;
+      i2c_sclk <= '0';
+      wait for period/2;
+    end procedure i2c_start;
+
+-- purpose: send i2c_idle
+-- examples: i2c_idle(); -- period defaults to 50 us
+    procedure i2c_idle(period : in time := 50 us) is
+    begin
+      report "idle";
+      i2c_sdat <= '1';
+      i2c_sclk <= '1';
+      wait for period;
+    end procedure i2c_idle;
+
+-- purpose: send i2c_stop
+-- examples: i2c_stop(); -- period defaults to 20 us
+    procedure i2c_stop(period : in time := 20 us) is
+    begin
+      report "stop";
+      i2c_sdat <= '0';
+      wait for period/2;
+      i2c_sclk <= '1';
+      wait for period/2;
+    end procedure i2c_stop;
+
 -- purpose: i2c write
 --example:     i2c_write("1010000", x"00000003");
     procedure i2c_write (
@@ -98,15 +130,8 @@ begin  -- architecture testbench
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
     begin
-      report "idle";
-      i2c_sdat <= '1';
-      i2c_sclk <= '1';
-      wait for 50 us;
-      report "start";
-      i2c_sdat <= '0';
-      wait for 10 us;
-      i2c_sclk <= '0';
-      wait for 10 us;
+      i2c_idle;
+      i2c_start;
       report "send address";
       for i in addr'range loop
         i2c_clk(addr(i));
@@ -135,15 +160,6 @@ begin  -- architecture testbench
           end if;
         end loop;  -- i
       end if;
-      report "stop";
-      i2c_sdat <= '0';
-      wait for 10 us;
-      i2c_sclk <= '1';
-      wait for 10 us;
-      report "idle";
-      i2c_sdat <= '1';
-      i2c_sclk <= '1';
-      wait for 50 us;
 
     --if verbose = true then
     --  write(my_line, string'("pci_write addr: "));
@@ -154,6 +170,8 @@ begin  -- architecture testbench
     --  write(my_line, now);
     --  writeline(output, my_line);
     --end if;
+      i2c_stop;
+      i2c_idle;
     end procedure i2c_write;
 
   begin
