@@ -36,14 +36,14 @@ architecture testbench of i2c_iface_tb is
 --  constant SLAVE_ADDR : std_logic_vector(6 downto 0) := "1010000";
 --  constant DATA_WIDTH : natural                      := 48;
   -- component ports
-  signal clk      : std_logic := '1';                           -- [in]
-  signal rst      : std_logic := '1';                           -- [in]
-  signal rst_out  : std_logic;                                  -- [out]
+  signal clk      : std_logic := '1';   -- [in]
   signal stop_clk : std_logic := '0';   -- set this to '1' when done
+  signal rst      : std_logic := '1';   -- [in]
+  signal rst_out  : std_logic;          -- [out]
   signal output   : std_logic_vector(DATA_WIDTH/2-1 downto 0);  -- [out]
-  signal valid    : std_logic;                                  -- [out]
-  signal i2c_sdat : std_logic;                                  -- [inout]
-  signal i2c_sclk : std_logic;                                  -- [inout]
+  signal valid    : std_logic;          -- [out]
+  signal i2c_sdat : std_logic;          -- [inout]
+  signal i2c_sclk : std_logic;          -- [inout]
   signal waddr    : std_logic_vector(ADDR_WIDTH downto 0);
   
 begin  -- architecture testbench
@@ -112,7 +112,7 @@ begin  -- architecture testbench
         i2c_clk(addr(i));
       end loop;  -- i
       report "write_cmd";
-       i2c_clk('0');
+      i2c_clk('0');
       report "get ack/nack address from slave";
       i2c_clk('Z');
       wait for 50 ns;
@@ -125,9 +125,9 @@ begin  -- architecture testbench
         for i in data'range loop
           report "sending data";
           i2c_clk(data(i));
-          bit_cnt  := bit_cnt+1;
+          bit_cnt := bit_cnt+1;
           if bit_cnt = 8 then
-            bit_cnt  := 0;
+            bit_cnt := 0;
             report "get ack/nack data from slave";
             i2c_clk('Z');
             wait for 50 ns;
