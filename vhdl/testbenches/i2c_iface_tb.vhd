@@ -151,8 +151,6 @@ begin  -- architecture testbench
     report "TC1: write 0xAA to the wrong slave address. no one should ack the address." severity note;
     i2c_write((not SLAVE_ADDR), x"AA");
     wait for 100 us;
---    i2c_write("1010101", x"AA");
---    wait for 100 us;
     report "TC2: write 0xAAAAAA to the slave address" severity note;
     i2c_write(SLAVE_ADDR, x"AAAAAA");
     wait until clk = '1';
