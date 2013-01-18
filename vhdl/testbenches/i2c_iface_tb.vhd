@@ -39,6 +39,7 @@ architecture testbench of i2c_iface_tb is
   signal clk      : std_logic := '1';                           -- [in]
   signal rst      : std_logic := '1';                           -- [in]
   signal rst_out  : std_logic;                                  -- [out]
+  signal stop_clk : std_logic := '0';   -- set this to '1' when done
   signal output   : std_logic_vector(DATA_WIDTH/2-1 downto 0);  -- [out]
   signal valid    : std_logic;                                  -- [out]
   signal i2c_sdat : std_logic;                                  -- [inout]
@@ -62,8 +63,16 @@ begin  -- architecture testbench
       i2c_sclk => i2c_sclk);            -- [inout std_logic]
 
   -- clock generation
-  clk <= not clk after 10 ns;
-  rst <= '0'     after 30 ns;
+  clk_gen_proc : process
+  begin
+    while stop_clk = '0' loop
+      wait for 10 ns;
+      clk <= not clk;
+    end loop;
+    wait;
+  end process clk_gen_proc;
+
+  rst <= '0' after 30 ns;
   -- waveform generation
   WaveGen_Proc : process
 
@@ -158,7 +167,9 @@ begin  -- architecture testbench
     wait for 100 us;
     report "TC2: write 0xAAAAAA to the slave address" severity note;
     i2c_write(SLAVE_ADDR, x"AAAAAA");
-    wait until clk = '1';
+    wait for 100 us;
+    stop_clk <= '1';
+    wait;
   end process WaveGen_Proc;
 
   
