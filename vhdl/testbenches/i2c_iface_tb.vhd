@@ -89,6 +89,7 @@ begin  -- architecture testbench
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
     begin
+      report "idle";
       i2c_sdat <= '1';
       i2c_sclk <= '1';
       wait for 50 us;
