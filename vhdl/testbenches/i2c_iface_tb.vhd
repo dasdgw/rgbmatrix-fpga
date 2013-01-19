@@ -171,7 +171,6 @@ begin  -- architecture testbench
     begin
       i2c_dbg("get ack/nack address from slave");
       i2c_clk('Z');
-      wait for 50 ns;
       -- if right address expect acknowledge '0'
       assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
       -- if wrong address expect not acknowledge 'Z'
