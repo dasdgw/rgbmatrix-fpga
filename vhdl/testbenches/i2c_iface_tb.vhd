@@ -214,24 +214,12 @@ begin  -- architecture testbench
           end if;
         end loop;  -- i
       end if;
-
-      --if verbose = true then
-      --  write(my_line, string'("pci_write addr: "));
-      --  hwrite(my_line, to_bitvector(addr));
-      --  write(my_line, string'(" value: "));
-      --  hwrite(my_line, to_bitvector(data));
-      --  write(my_line, string'(" @ "));
-      --  write(my_line, now);
-      --  writeline(output, my_line);
-      --end if;
       i2c_stop;
       i2c_idle;
     end procedure i2c_write;
 
-    variable msg_line : line;
-  begin  -- procedure printf
+  begin
     printf("start i2c simulation: ...");
-    -- insert signal assignments here
     i2c_dbg(LF & "TC0: write 0xAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AA");
     wait for 100 us;
