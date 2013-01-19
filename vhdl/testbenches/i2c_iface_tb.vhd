@@ -155,8 +155,7 @@ begin  -- architecture testbench
             bit_cnt := 0;
             report "get ack/nack data from slave";
             i2c_clk('Z');
-            wait for 50 ns;
-            assert i2c_sdat = 'Z' report "no slave has acked the data" severity warning;
+            assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
           end if;
         end loop;  -- i
       end if;
