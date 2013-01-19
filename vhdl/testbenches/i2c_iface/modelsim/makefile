@@ -1,9 +1,11 @@
+SRC  = ../../../rgbmatrix_pkg.vhd
+SRC  += ../../../i2c_iface.vhd
+SRC  += ../../i2c_iface_tb.vhd
+
 work:
 	vlib work
 comp:
-	vcom -2008 ../../../rgbmatrix_pkg.vhd
-	vcom -2008 ../../../i2c_iface.vhd
-	vcom -2008 ../../i2c_iface_tb.vhd
+	vcom -2008 $(SRC)
 sim:
 	vsim -do "run.do"
 clean:
