@@ -171,6 +171,11 @@ begin  -- architecture testbench
     begin
       i2c_dbg("get ack/nack address from slave");
       i2c_clk('Z');
+      if i2c_sdat = '0' then
+        i2c_dbg("slave acknowledged address");
+      else
+          i2c_dbg("slave *not* acknowledged address");
+      end if;
       -- if right address expect acknowledge '0'
       assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
       -- if wrong address expect not acknowledge 'Z'
@@ -183,6 +188,11 @@ begin  -- architecture testbench
     begin
       i2c_dbg("get ack/nack data from slave");
       i2c_clk('Z');
+      if i2c_sdat = '0' then
+        i2c_dbg("slave acknowledged data");
+      else
+          i2c_dbg("slave *not* acknowledged data");
+      end if;
       assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
     end procedure i2c_check_data;
 
