@@ -1,9 +1,9 @@
 work:
 	vlib work
 comp:
-	vcom ../../../rgbmatrix_pkg.vhd
-	vcom ../../../i2c_iface.vhd
-	vcom ../../i2c_iface_tb.vhd
+	vcom -2008 ../../../rgbmatrix_pkg.vhd
+	vcom -2008 ../../../i2c_iface.vhd
+	vcom -2008 ../../i2c_iface_tb.vhd
 sim:
 	vsim -do "run.do"
 clean:
