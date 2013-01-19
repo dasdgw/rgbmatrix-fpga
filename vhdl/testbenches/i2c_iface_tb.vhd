@@ -122,6 +122,49 @@ begin  -- architecture testbench
       wait for period/2;
     end procedure i2c_stop;
 
+-- purpose: send i2c_write_cmd
+-- examples: i2c_write_cmd;
+    procedure i2c_write_cmd is
+    begin
+      report "write_cmd";
+      i2c_clk('0');
+    end procedure i2c_write_cmd;
+
+-- purpose: send i2c address
+-- examples: i2c_write_address;
+    procedure i2c_send_address(addr : in std_logic_vector) is
+    begin
+      report "send address";
+      for i in addr'range loop
+        i2c_clk(addr(i));
+      end loop;  -- i
+    end procedure i2c_send_address;
+
+-- purpose: get acknowledge bit from slave and check if slave acknowledged
+-- *only* his address
+-- examples: i2c_check_address;
+    procedure i2c_check_address(addr : in std_logic_vector) is
+    begin
+      report "get ack/nack address from slave";
+      i2c_clk('Z');
+      wait for 50 ns;
+      -- if right address expect acknowledge '0'
+      assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
+      -- if wrong address expect not acknowledge 'Z'
+      assert not (not addr = SLAVE_ADDR and not i2c_sdat = 'Z') severity failure;
+    end procedure i2c_check_address;
+
+-- purpose: get acknowledge bit from slave and check if slave acknowledged writing of data
+-- examples: i2c_check_data;
+    procedure i2c_check_data is
+    begin
+      report "get ack/nack data from slave";
+      i2c_clk('Z');
+      assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
+    end procedure i2c_check_data;
+
+
+
 -- purpose: i2c write
 --example:     i2c_write("1010000", x"00000003");
     procedure i2c_write (
@@ -132,19 +175,9 @@ begin  -- architecture testbench
     begin
       i2c_idle;
       i2c_start;
-      report "send address";
-      for i in addr'range loop
-        i2c_clk(addr(i));
-      end loop;  -- i
-      report "write_cmd";
-      i2c_clk('0');
-      report "get ack/nack address from slave";
-      i2c_clk('Z');
-      wait for 50 ns;
-      -- if right address expect acknowledge '0'
-      assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
-      -- if wrong address expect not acknowledge 'Z'
-      assert not (not addr = SLAVE_ADDR and not i2c_sdat = 'Z') severity failure;
+      i2c_send_address(addr);
+      i2c_write_cmd;
+      i2c_check_address(addr);
       -- only send data if valid address is used
       if addr = SLAVE_ADDR then
         for i in data'range loop
@@ -153,9 +186,7 @@ begin  -- architecture testbench
           bit_cnt := bit_cnt+1;
           if bit_cnt = 8 then
             bit_cnt := 0;
-            report "get ack/nack data from slave";
-            i2c_clk('Z');
-            assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
+            i2c_check_data;
           end if;
         end loop;  -- i
       end if;
