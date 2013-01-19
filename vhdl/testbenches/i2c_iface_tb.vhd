@@ -51,9 +51,10 @@ architecture testbench of i2c_iface_tb is
 
 
   --constant i2c_log2stdout : boolean := true;
-  constant i2c_log2stdout : boolean := false;
-  constant i2c_log2file   : boolean := true;
-  file i2c_log_file       : text open write_mode is "i2c.log";
+  constant i2c_log2stdout   : boolean := false;
+  constant i2c_log2file     : boolean := true;
+  constant i2c_logfile_name : string  := "i2c.log";
+  file i2c_log_file         : text open write_mode is i2c_logfile_name;
 
 -- purpose: print message on stdout
   procedure printf(msg : in string) is
@@ -221,6 +222,11 @@ begin  -- architecture testbench
 
   begin
     printf("start i2c simulation: ...");
+    if i2c_log2file then
+      printf("logging to: " & i2c_logfile_name);
+    else
+      printf("logging to file disabled.");
+    end if;
     i2c_dbg(LF & "TC0: write 0xAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AA");
     wait for 100 us;
@@ -244,7 +250,7 @@ end architecture testbench;
 
 configuration i2c_iface_tb_testbench_cfg of i2c_iface_tb is
   for testbench
-  end for;
+end for;
 end i2c_iface_tb_testbench_cfg;
 
 -------------------------------------------------------------------------------
