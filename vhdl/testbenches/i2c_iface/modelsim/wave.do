@@ -3,7 +3,7 @@ quietly WaveActivateNextPane {} 0
 add wave -noupdate /i2c_iface_tb/clk
 add wave -noupdate /i2c_iface_tb/rst
 add wave -noupdate /i2c_iface_tb/rst_out
-add wave -noupdate /i2c_iface_tb/output
+add wave -noupdate /i2c_iface_tb/output_tbd
 add wave -noupdate /i2c_iface_tb/valid
 add wave -noupdate /i2c_iface_tb/i2c_sclk
 add wave -noupdate /i2c_iface_tb/i2c_sdat

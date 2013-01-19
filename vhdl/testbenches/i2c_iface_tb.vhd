@@ -20,7 +20,10 @@
 -------------------------------------------------------------------------------
 
 library ieee;
+library std;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use std.textio.all;
 use work.rgbmatrix_pkg.all;
 -------------------------------------------------------------------------------
 
@@ -36,16 +39,43 @@ architecture testbench of i2c_iface_tb is
 --  constant SLAVE_ADDR : std_logic_vector(6 downto 0) := "1010000";
 --  constant DATA_WIDTH : natural                      := 48;
   -- component ports
-  signal clk      : std_logic := '1';   -- [in]
-  signal stop_clk : std_logic := '0';   -- set this to '1' when done
-  signal rst      : std_logic := '1';   -- [in]
-  signal rst_out  : std_logic;          -- [out]
-  signal output   : std_logic_vector(DATA_WIDTH/2-1 downto 0);  -- [out]
-  signal valid    : std_logic;          -- [out]
-  signal i2c_sdat : std_logic;          -- [inout]
-  signal i2c_sclk : std_logic;          -- [inout]
-  signal waddr    : std_logic_vector(ADDR_WIDTH downto 0);
-  
+  signal clk        : std_logic := '1';  -- [in]
+  signal stop_clk   : std_logic := '0';  -- set this to '1' when done
+  signal rst        : std_logic := '1';  -- [in]
+  signal rst_out    : std_logic;        -- [out]
+  signal output_tbd : std_logic_vector(DATA_WIDTH/2-1 downto 0);  -- [out]
+  signal valid      : std_logic;        -- [out]
+  signal i2c_sdat   : std_logic;        -- [inout]
+  signal i2c_sclk   : std_logic;        -- [inout]
+  signal waddr      : std_logic_vector(ADDR_WIDTH downto 0);
+
+
+  --constant i2c_log2stdout : boolean := true;
+  constant i2c_log2stdout : boolean := false;
+  constant i2c_log2file   : boolean := true;
+  file i2c_log_file       : text open write_mode is "i2c.log";
+
+-- purpose: print message on stdout
+  procedure printf(msg : in string) is
+    variable msg_line : line;
+  begin  -- procedure printf
+    write(msg_line, string'(msg));
+    writeline(output, msg_line);
+  end procedure printf;
+
+  procedure i2c_dbg(msg : in string) is
+    variable msg_line : line;
+  begin  -- procedure i2c_dbg
+    if i2c_log2stdout then
+      write(msg_line, string'(msg));
+      writeline(output, msg_line);
+    end if;
+    if i2c_log2file then
+      write(msg_line, string'(msg));
+      writeline(i2c_log_file, msg_line);
+    end if;
+  end procedure i2c_dbg;
+
 begin  -- architecture testbench
 
   -- component instantiation
@@ -56,8 +86,8 @@ begin  -- architecture testbench
       clk      => clk,                  -- [in  std_logic]
       rst      => rst,                  -- [in  std_logic]
       rst_out  => rst_out,              -- [out std_logic]
-      waddr    => waddr,   -- [out std_logic_vector(ADDR_WIDTH downto 0)]
-      output   => output,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
+      waddr    => waddr,       -- [out std_logic_vector(ADDR_WIDTH downto 0)]
+      output   => output_tbd,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
       valid    => valid,                -- [out std_logic]
       i2c_sdat => i2c_sdat,             -- [inout std_logic]
       i2c_sclk => i2c_sclk);            -- [inout std_logic]
@@ -86,7 +116,7 @@ begin  -- architecture testbench
 -- examples: i2c_start(); -- period defaults to 20 us
     procedure i2c_start(period : in time := 20 us) is
     begin
-      report "start";
+      i2c_dbg("start");
       i2c_sdat <= '0';
       wait for period/2;
       i2c_sclk <= '0';
@@ -97,7 +127,7 @@ begin  -- architecture testbench
 -- examples: i2c_idle(); -- period defaults to 50 us
     procedure i2c_idle(period : in time := 50 us) is
     begin
-      report "idle";
+      i2c_dbg("idle");
       i2c_sdat <= '1';
       i2c_sclk <= '1';
       wait for period;
@@ -107,7 +137,7 @@ begin  -- architecture testbench
 -- examples: i2c_stop(); -- period defaults to 20 us
     procedure i2c_stop(period : in time := 20 us) is
     begin
-      report "stop";
+      i2c_dbg("stop");
       i2c_sdat <= '0';
       wait for period/2;
       i2c_sclk <= '1';
@@ -118,7 +148,7 @@ begin  -- architecture testbench
 -- examples: i2c_write_cmd;
     procedure i2c_write_cmd is
     begin
-      report "write_cmd";
+      i2c_dbg("write_cmd");
       i2c_clk('0');
     end procedure i2c_write_cmd;
 
@@ -126,7 +156,7 @@ begin  -- architecture testbench
 -- examples: i2c_write_address;
     procedure i2c_send_address(addr : in std_logic_vector) is
     begin
-      report "send address";
+      i2c_dbg("send address: " & to_hstring(addr));
       for i in addr'range loop
         i2c_clk(addr(i));
       end loop;  -- i
@@ -137,7 +167,7 @@ begin  -- architecture testbench
 -- examples: i2c_check_address;
     procedure i2c_check_address(addr : in std_logic_vector) is
     begin
-      report "get ack/nack address from slave";
+      i2c_dbg("get ack/nack address from slave");
       i2c_clk('Z');
       wait for 50 ns;
       -- if right address expect acknowledge '0'
@@ -150,7 +180,7 @@ begin  -- architecture testbench
 -- examples: i2c_check_data;
     procedure i2c_check_data is
     begin
-      report "get ack/nack data from slave";
+      i2c_dbg("get ack/nack data from slave");
       i2c_clk('Z');
       assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
     end procedure i2c_check_data;
@@ -165,6 +195,7 @@ begin  -- architecture testbench
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
     begin
+      i2c_dbg("writing at addr: " & to_hstring(addr) & " data: " & to_hstring(data));
       i2c_idle;
       i2c_start;
       i2c_send_address(addr);
@@ -173,7 +204,8 @@ begin  -- architecture testbench
       -- only send data if valid address is used
       if addr = SLAVE_ADDR then
         for i in data'range loop
-          report "sending data";
+          --i2c_dbg("sending data bit: " & integer'image(i) & "/" & integer'image(data'length-1));
+          i2c_dbg("sending data bit: " & integer'image(i) & " Value: " & to_string(data(i)));
           i2c_clk(data(i));
           bit_cnt := bit_cnt+1;
           if bit_cnt = 8 then
@@ -183,33 +215,35 @@ begin  -- architecture testbench
         end loop;  -- i
       end if;
 
-    --if verbose = true then
-    --  write(my_line, string'("pci_write addr: "));
-    --  hwrite(my_line, to_bitvector(addr));
-    --  write(my_line, string'(" value: "));
-    --  hwrite(my_line, to_bitvector(data));
-    --  write(my_line, string'(" @ "));
-    --  write(my_line, now);
-    --  writeline(output, my_line);
-    --end if;
+      --if verbose = true then
+      --  write(my_line, string'("pci_write addr: "));
+      --  hwrite(my_line, to_bitvector(addr));
+      --  write(my_line, string'(" value: "));
+      --  hwrite(my_line, to_bitvector(data));
+      --  write(my_line, string'(" @ "));
+      --  write(my_line, now);
+      --  writeline(output, my_line);
+      --end if;
       i2c_stop;
       i2c_idle;
     end procedure i2c_write;
 
-  begin
-    report "start i2c simulation: ..." severity note;
+    variable msg_line : line;
+  begin  -- procedure printf
+    printf("start i2c simulation: ...");
     -- insert signal assignments here
-    report "TC0: write 0xAA to the slave address" severity note;
+    i2c_dbg(LF & "TC0: write 0xAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AA");
     wait for 100 us;
-    report "TC1: write 0xAA to the wrong slave address. no one should ack the address." severity note;
+    i2c_dbg(LF & "TC1: write 0xAA to the wrong slave address. no one should ack the address.");
     i2c_write((not SLAVE_ADDR), x"AA");
     wait for 100 us;
-    report "TC2: write 0xAAAAAA to the slave address" severity note;
+    i2c_dbg(LF & "TC2: write 0xAAAAAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AAAAAA");
     wait for 100 us;
     stop_clk <= '1';
-    report  "stop simulation without errors." & LF & "runtime: " & time'image(now);
+    i2c_dbg("stop simulation without errors." & LF & "runtime: " & time'image(now));
+    printf("stop i2c simulation.");
     wait;
   end process WaveGen_Proc;
 
