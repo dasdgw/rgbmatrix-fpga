@@ -68,11 +68,11 @@ architecture testbench of i2c_iface_tb is
     variable msg_line : line;
   begin  -- procedure i2c_dbg
     if i2c_log2stdout then
-      write(msg_line, string'(msg));
+      write(msg_line, justify(to_string(now, ns), right, 10) & ": " & string'(msg));
       writeline(output, msg_line);
     end if;
     if i2c_log2file then
-      write(msg_line, string'(msg));
+      write(msg_line, justify(to_string(now, ns), right, 10) & ": " & string'(msg));
       writeline(i2c_log_file, msg_line);
     end if;
   end procedure i2c_dbg;
@@ -174,7 +174,7 @@ begin  -- architecture testbench
       if i2c_sdat = '0' then
         i2c_dbg("slave acknowledged address");
       else
-          i2c_dbg("slave *not* acknowledged address");
+        i2c_dbg("slave *not* acknowledged address");
       end if;
       -- if right address expect acknowledge '0'
       assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
@@ -191,7 +191,7 @@ begin  -- architecture testbench
       if i2c_sdat = '0' then
         i2c_dbg("slave acknowledged data");
       else
-          i2c_dbg("slave *not* acknowledged data");
+        i2c_dbg("slave *not* acknowledged data");
       end if;
       assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
     end procedure i2c_check_data;
@@ -259,7 +259,7 @@ end architecture testbench;
 
 configuration i2c_iface_tb_testbench_cfg of i2c_iface_tb is
   for testbench
-end for;
+  end for;
 end i2c_iface_tb_testbench_cfg;
 
 -------------------------------------------------------------------------------
