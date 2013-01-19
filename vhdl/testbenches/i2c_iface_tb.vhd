@@ -63,16 +63,8 @@ begin  -- architecture testbench
       i2c_sclk => i2c_sclk);            -- [inout std_logic]
 
   -- clock generation
-  clk_gen_proc : process
-  begin
-    while stop_clk = '0' loop
-      wait for 10 ns;
-      clk <= not clk;
-    end loop;
-    wait;
-  end process clk_gen_proc;
-
-  rst <= '0' after 30 ns;
+  clk <= not clk after 10 ns when stop_clk /= '1' else '0';
+  rst <= '0'     after 30 ns;
   -- waveform generation
   WaveGen_Proc : process
 
@@ -217,6 +209,7 @@ begin  -- architecture testbench
     i2c_write(SLAVE_ADDR, x"AAAAAA");
     wait for 100 us;
     stop_clk <= '1';
+    report  "stop simulation without errors." & LF & "runtime: " & time'image(now);
     wait;
   end process WaveGen_Proc;
 
