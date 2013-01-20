@@ -6,7 +6,7 @@
 -- Author     :   <dasdgw@karel.dhcp.heaven>
 -- Company    : frankalicious
 -- Created    : 2012-12-29
--- Last update: 2013-01-19
+-- Last update: 2013-01-20
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -24,6 +24,7 @@ library std;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.textio.all;
+use work.util_pkg.all;
 use work.rgbmatrix_pkg.all;
 -------------------------------------------------------------------------------
 
@@ -49,32 +50,12 @@ architecture testbench of i2c_iface_tb is
   signal i2c_sclk   : std_logic;        -- [inout]
   signal waddr      : std_logic_vector(ADDR_WIDTH downto 0);
 
-
-  --constant i2c_log2stdout : boolean := true;
-  constant i2c_log2stdout   : boolean := false;
-  constant i2c_log2file     : boolean := true;
-  constant i2c_logfile_name : string  := "i2c.log";
-  file i2c_log_file         : text open write_mode is i2c_logfile_name;
-
--- purpose: print message on stdout
-  procedure printf(msg : in string) is
-    variable msg_line : line;
-  begin  -- procedure printf
-    write(msg_line, string'(msg));
-    writeline(output, msg_line);
-  end procedure printf;
+  constant i2c_log : log_type := (false, true, "i2c.log");
 
   procedure i2c_dbg(msg : in string) is
     variable msg_line : line;
   begin  -- procedure i2c_dbg
-    if i2c_log2stdout then
-      write(msg_line, justify(to_string(now, ns), right, 10) & ": " & string'(msg));
-      writeline(output, msg_line);
-    end if;
-    if i2c_log2file then
-      write(msg_line, justify(to_string(now, ns), right, 10) & ": " & string'(msg));
-      writeline(i2c_log_file, msg_line);
-    end if;
+    printf(i2c_log, msg);
   end procedure i2c_dbg;
 
 begin  -- architecture testbench
@@ -231,11 +212,7 @@ begin  -- architecture testbench
 
   begin
     printf("start i2c simulation: ...");
-    if i2c_log2file then
-      printf("logging to: " & i2c_logfile_name);
-    else
-      printf("logging to file disabled.");
-    end if;
+    info(i2c_log);
     i2c_dbg(LF & "TC0: write 0xAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AA");
     wait for 100 us;
