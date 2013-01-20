@@ -213,13 +213,13 @@ begin  -- architecture testbench
   begin
     printf("start i2c simulation: ...");
     info(i2c_log);
-    i2c_dbg(LF & "TC0: write 0xAA to the slave address");
+    i2c_dbg("TC0: write 0xAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AA");
     wait for 100 us;
-    i2c_dbg(LF & "TC1: write 0xAA to the wrong slave address. no one should ack the address.");
+    i2c_dbg("TC1: write 0xAA to the wrong slave address. no one should ack the address.");
     i2c_write((not SLAVE_ADDR), x"AA");
     wait for 100 us;
-    i2c_dbg(LF & "TC2: write 0xAAAAAA to the slave address");
+    i2c_dbg("TC2: write 0xAAAAAA to the slave address");
     i2c_write(SLAVE_ADDR, x"AAAAAA");
     wait for 100 us;
     stop_clk <= '1';
