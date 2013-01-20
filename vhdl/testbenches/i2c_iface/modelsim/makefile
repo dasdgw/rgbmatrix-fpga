@@ -14,3 +14,5 @@ clean:
 	rm -f vsim.wlf
 	rm -rf work
 	rm -f *.log
+tags:
+	exuberant-ctags -e $(SRC)
