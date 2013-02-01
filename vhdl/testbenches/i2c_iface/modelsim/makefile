@@ -1,5 +1,5 @@
 comp:
-	vsim -do "do comp.do;quit -f"
+	vsim -c -do "do comp.do;quit -f"
 sim:
 	vsim -do "modelsim.do"
 clean:
