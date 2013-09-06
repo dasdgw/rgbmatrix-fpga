@@ -208,10 +208,10 @@ begin  -- architecture testbench
 
 -- purpose: i2c write
 --example:     i2c_write("1010000", x"00000003");
-    procedure i2c_write_chk_ack (
+    procedure i2c_write (
       addr       : in std_logic_vector;
       data       : in std_logic_vector;
-      expect_ack : in boolean) is
+      expect_ack : in boolean := true) is
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
       variable ret     : boolean;
@@ -235,23 +235,7 @@ begin  -- architecture testbench
       end loop;  -- i
       i2c_stop;
       i2c_idle;
-    end procedure i2c_write_chk_ack;
-
-    procedure i2c_write (
-      addr       : in std_logic_vector;
-      data       : in std_logic_vector;
-      expect_ack : in boolean) is
-    begin
-      i2c_write_chk_ack(addr, data, expect_ack);
     end procedure i2c_write;
-
-    procedure i2c_write (
-      addr : in std_logic_vector;
-      data : in std_logic_vector) is
-    begin
-      i2c_write_chk_ack(addr, data, true);
-    end procedure i2c_write;
-
 
   begin
     printf("start i2c simulation: ...");
