@@ -6,7 +6,7 @@
 -- Author     :   <dasdgw@karel.dhcp.heaven>
 -- Company    : frankalicious
 -- Created    : 2012-12-29
--- Last update: 2013-02-01
+-- Last update: 2013-09-06
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -182,16 +182,27 @@ begin  -- architecture testbench
 
 -- purpose: check if any slave acknowledges
 -- examples: i2c_get_acknack;
-    procedure i2c_get_ack is
+    procedure i2c_get_ack (expect_ack : in boolean) is
     begin
       i2c_dbg("get ack/nack from slave");
       i2c_clk('Z');
-      if i2c_sdat = '0' then
-        i2c_dbg("slave acknowledged data");
+
+      if expect_ack = true then
+        if (i2c_sdat /= '0') then
+          assert false report "no slave has acked." severity warning;
+          i2c_dbg("ERROR: no slave acknowledged data");
+         else
+           i2c_dbg("slave acknowledged data");
+        end if;
       else
-        i2c_dbg("slave *not* acknowledged data");
+        if i2c_sdat /= 'Z' then
+          assert false report "slave has acked unexpected." severity warning;
+          i2c_dbg("ERROR: slave acknowledged data");
+        else
+          i2c_dbg("slave *not* acknowledged data");
+        end if;
       end if;
-      assert not (i2c_sdat = 'Z') report "no slave has acked." severity warning;
+
     end procedure i2c_get_ack;
 
 
@@ -200,7 +211,8 @@ begin  -- architecture testbench
 --example:     i2c_write("1010000", x"00000003");
     procedure i2c_write (
       addr : in std_logic_vector;
-      data : in std_logic_vector) is
+      data : in std_logic_vector;
+      expect_ack : in boolean) is
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
       variable ret     : boolean;
@@ -211,7 +223,7 @@ begin  -- architecture testbench
       i2c_send_address(addr);
       i2c_write_cmd;
       -- only send data if valid address is used
-      i2c_get_ack;
+      i2c_get_ack(expect_ack);
       for i in data'range loop
         --i2c_dbg("sending data bit: " & integer'image(i) & "/" & integer'image(data'length-1));
         i2c_dbg("sending data bit: " & integer'image(i) & " Value: " & to_string(data(i)));
@@ -219,7 +231,7 @@ begin  -- architecture testbench
         bit_cnt := bit_cnt+1;
         if bit_cnt = 8 then
           bit_cnt := 0;
-          i2c_get_ack;
+          i2c_get_ack(expect_ack);
         end if;
       end loop;  -- i
       i2c_stop;
@@ -232,22 +244,22 @@ begin  -- architecture testbench
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC0: write 0xAA to the slave1 address");
     i2c_dbg("********************************************************************************");
-    i2c_write(SLAVE_ADDR1, x"AA");
+    i2c_write(SLAVE_ADDR1, x"AA", true);
     wait for 100 us;
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC1: write 0xAA to the wrong slave address. no one should ack the address.");
     i2c_dbg("********************************************************************************");
-    i2c_write((not SLAVE_ADDR1), x"AA");
+    i2c_write((not SLAVE_ADDR1), x"AA", false);
     wait for 100 us;
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC2: write 0xAAAAAA to the slave1 address");
     i2c_dbg("********************************************************************************");
-    i2c_write(SLAVE_ADDR1, x"AAAAAA");
+    i2c_write(SLAVE_ADDR1, x"AAAAAA", true);
     wait for 100 us;
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC3: write 0xAAAAAA to the slave2 address");
     i2c_dbg("********************************************************************************");
-    i2c_write(SLAVE_ADDR2, x"AAAAAA");
+    i2c_write(SLAVE_ADDR2, x"AAAAAA", true);
     wait for 100 us;
     stop_clk <= '1';
     i2c_dbg("stop simulation without errors." & LF & "runtime: " & time'image(now));
