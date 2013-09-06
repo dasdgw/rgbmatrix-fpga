@@ -191,8 +191,8 @@ begin  -- architecture testbench
         if (i2c_sdat /= '0') then
           assert false report "no slave has acked." severity warning;
           i2c_dbg("ERROR: no slave acknowledged data");
-         else
-           i2c_dbg("slave acknowledged data");
+        else
+          i2c_dbg("slave acknowledged data");
         end if;
       else
         if i2c_sdat /= 'Z' then
@@ -206,12 +206,11 @@ begin  -- architecture testbench
     end procedure i2c_get_ack;
 
 
-
 -- purpose: i2c write
 --example:     i2c_write("1010000", x"00000003");
-    procedure i2c_write (
-      addr : in std_logic_vector;
-      data : in std_logic_vector;
+    procedure i2c_write_chk_ack (
+      addr       : in std_logic_vector;
+      data       : in std_logic_vector;
       expect_ack : in boolean) is
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
@@ -236,7 +235,23 @@ begin  -- architecture testbench
       end loop;  -- i
       i2c_stop;
       i2c_idle;
+    end procedure i2c_write_chk_ack;
+
+    procedure i2c_write (
+      addr       : in std_logic_vector;
+      data       : in std_logic_vector;
+      expect_ack : in boolean) is
+    begin
+      i2c_write_chk_ack(addr, data, expect_ack);
     end procedure i2c_write;
+
+    procedure i2c_write (
+      addr : in std_logic_vector;
+      data : in std_logic_vector) is
+    begin
+      i2c_write_chk_ack(addr, data, true);
+    end procedure i2c_write;
+
 
   begin
     printf("start i2c simulation: ...");
@@ -244,7 +259,7 @@ begin  -- architecture testbench
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC0: write 0xAA to the slave1 address");
     i2c_dbg("********************************************************************************");
-    i2c_write(SLAVE_ADDR1, x"AA", true);
+    i2c_write(SLAVE_ADDR1, x"AA");
     wait for 100 us;
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC1: write 0xAA to the wrong slave address. no one should ack the address.");
@@ -254,12 +269,12 @@ begin  -- architecture testbench
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC2: write 0xAAAAAA to the slave1 address");
     i2c_dbg("********************************************************************************");
-    i2c_write(SLAVE_ADDR1, x"AAAAAA", true);
+    i2c_write(SLAVE_ADDR1, x"AAAAAA");
     wait for 100 us;
     i2c_dbg("********************************************************************************");
     i2c_dbg("TC3: write 0xAAAAAA to the slave2 address");
     i2c_dbg("********************************************************************************");
-    i2c_write(SLAVE_ADDR2, x"AAAAAA", true);
+    i2c_write(SLAVE_ADDR2, x"AAAAAA");
     wait for 100 us;
     stop_clk <= '1';
     i2c_dbg("stop simulation without errors." & LF & "runtime: " & time'image(now));
@@ -267,7 +282,7 @@ begin  -- architecture testbench
     wait;
   end process WaveGen_Proc;
 
-  
+
 
 end architecture testbench;
 
