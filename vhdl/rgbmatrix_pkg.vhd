@@ -32,7 +32,10 @@ package rgbmatrix_pkg is
 --  constant IFACE       : string                       := "jtag";
   constant IFACE      : string                       := "i2c";
   -- if you are using i2c you have to configure a slave address
-  constant SLAVE_ADDR : std_logic_vector(6 downto 0) := "1010101";
+  -- data slave
+  constant SLAVE_ADDR1 : std_logic_vector(6 downto 0) := "1010101";
+  -- control slave
+  constant SLAVE_ADDR2 : std_logic_vector(6 downto 0) := "1010110";
 
 -- User configurable constants
   constant NUM_PANELS  : integer := 1;  -- total number of LED matrix panels

@@ -6,7 +6,7 @@
 -- Author     :   <dasdgw@karel.dhcp.heaven>
 -- Company    : frankalicious
 -- Created    : 2012-12-29
--- Last update: 2013-01-20
+-- Last update: 2013-02-01
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -40,15 +40,18 @@ architecture testbench of i2c_iface_tb is
 --  constant SLAVE_ADDR : std_logic_vector(6 downto 0) := "1010000";
 --  constant DATA_WIDTH : natural                      := 48;
   -- component ports
-  signal clk        : std_logic := '1';  -- [in]
-  signal stop_clk   : std_logic := '0';  -- set this to '1' when done
-  signal rst        : std_logic := '1';  -- [in]
-  signal rst_out    : std_logic;        -- [out]
-  signal output_tbd : std_logic_vector(DATA_WIDTH/2-1 downto 0);  -- [out]
-  signal valid      : std_logic;        -- [out]
-  signal i2c_sdat   : std_logic;        -- [inout]
-  signal i2c_sclk   : std_logic;        -- [inout]
-  signal waddr      : std_logic_vector(ADDR_WIDTH downto 0);
+  signal clk         : std_logic := '1';  -- [in]
+  signal stop_clk    : std_logic := '0';  -- set this to '1' when done
+  signal rst         : std_logic := '1';  -- [in]
+  signal rst_out     : std_logic;       -- [out]
+  signal output_tbd  : std_logic_vector(DATA_WIDTH/2-1 downto 0);  -- [out]
+  signal valid       : std_logic;       -- [out]
+  signal i2c_sdat    : std_logic;       -- [inout]
+  signal i2c_sclk    : std_logic;       -- [inout]
+  signal waddr       : std_logic_vector(ADDR_WIDTH downto 0);
+  signal data_valid1 : std_logic;       -- [out]
+  signal data_valid2 : std_logic;       -- [out]
+  signal data_o      : std_logic_vector(7 downto 0);
 
   constant i2c_log : log_type := (false, true, "i2c.log");
 
@@ -61,19 +64,32 @@ architecture testbench of i2c_iface_tb is
 begin  -- architecture testbench
 
   -- component instantiation
-  DUT : entity work.i2c_iface
+  --DUT : entity work.i2c_iface
+  --  generic map (
+  --    SLAVE_ADDR => SLAVE_ADDR)         -- [std_logic_vector(6 downto 0)]
+  --  port map (
+  --    clk      => clk,                  -- [in  std_logic]
+  --    rst      => rst,                  -- [in  std_logic]
+  --    rst_out  => rst_out,              -- [out std_logic]
+  --    waddr    => waddr,       -- [out std_logic_vector(ADDR_WIDTH downto 0)]
+  --    output   => output_tbd,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
+  --    valid    => valid,                -- [out std_logic]
+  --    i2c_sdat => i2c_sdat,             -- [inout std_logic]
+  --    i2c_sclk => i2c_sclk);            -- [inout std_logic]
+
+  i2c_slave_1 : entity work.i2c_slave
     generic map (
-      SLAVE_ADDR => SLAVE_ADDR)         -- [std_logic_vector(6 downto 0)]
+      SLAVE_ADDR1 => SLAVE_ADDR1,       -- [std_logic_vector(6 downto 0)]
+      SLAVE_ADDR2 => SLAVE_ADDR2        -- [std_logic_vector(6 downto 0)]
+      )                                 -- [std_logic_vector(6 downto 0)]
     port map (
       clk      => clk,                  -- [in  std_logic]
       rst      => rst,                  -- [in  std_logic]
-      rst_out  => rst_out,              -- [out std_logic]
-      waddr    => waddr,       -- [out std_logic_vector(ADDR_WIDTH downto 0)]
-      output   => output_tbd,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
-      valid    => valid,                -- [out std_logic]
+      data_o   => data_o,               -- [out std_logic_vector(7 downto 0)]
+      valid1   => data_valid1,          -- [out std_logic]
+      valid2   => data_valid2,          -- [out std_logic]
       i2c_sdat => i2c_sdat,             -- [inout std_logic]
       i2c_sclk => i2c_sclk);            -- [inout std_logic]
-
   -- clock generation
   clk <= not clk after 10 ns when stop_clk /= '1' else '0';
   rst <= '0'     after 30 ns;
@@ -158,24 +174,25 @@ begin  -- architecture testbench
         i2c_dbg("slave *not* acknowledged address");
       end if;
       -- if right address expect acknowledge '0'
-      assert not (addr = SLAVE_ADDR and not i2c_sdat = '0') severity failure;
+      assert not (((addr = SLAVE_ADDR1) or (addr = SLAVE_ADDR2)) and not i2c_sdat = '0') severity warning;
       -- if wrong address expect not acknowledge 'Z'
-      assert not (not addr = SLAVE_ADDR and not i2c_sdat = 'Z') severity failure;
+      assert not (not ((addr = SLAVE_ADDR1) or (addr = SLAVE_ADDR2)) and not i2c_sdat = 'Z')
+        severity warning;
     end procedure i2c_check_address;
 
--- purpose: get acknowledge bit from slave and check if slave acknowledged writing of data
--- examples: i2c_check_data;
-    procedure i2c_check_data is
+-- purpose: check if any slave acknowledges
+-- examples: i2c_get_acknack;
+    procedure i2c_get_ack is
     begin
-      i2c_dbg("get ack/nack data from slave");
+      i2c_dbg("get ack/nack from slave");
       i2c_clk('Z');
       if i2c_sdat = '0' then
         i2c_dbg("slave acknowledged data");
       else
         i2c_dbg("slave *not* acknowledged data");
       end if;
-      assert not (i2c_sdat = 'Z') report "slave has not acked the data" severity failure;
-    end procedure i2c_check_data;
+      assert not (i2c_sdat = 'Z') report "no slave has acked." severity warning;
+    end procedure i2c_get_ack;
 
 
 
@@ -186,26 +203,25 @@ begin  -- architecture testbench
       data : in std_logic_vector) is
 --      variable my_line : line;
       variable bit_cnt : integer := 0;
+      variable ret     : boolean;
     begin
       i2c_dbg("writing at addr: " & to_hstring(addr) & " data: " & to_hstring(data));
       i2c_idle;
       i2c_start;
       i2c_send_address(addr);
       i2c_write_cmd;
-      i2c_check_address(addr);
       -- only send data if valid address is used
-      if addr = SLAVE_ADDR then
-        for i in data'range loop
-          --i2c_dbg("sending data bit: " & integer'image(i) & "/" & integer'image(data'length-1));
-          i2c_dbg("sending data bit: " & integer'image(i) & " Value: " & to_string(data(i)));
-          i2c_clk(data(i));
-          bit_cnt := bit_cnt+1;
-          if bit_cnt = 8 then
-            bit_cnt := 0;
-            i2c_check_data;
-          end if;
-        end loop;  -- i
-      end if;
+      i2c_get_ack;
+      for i in data'range loop
+        --i2c_dbg("sending data bit: " & integer'image(i) & "/" & integer'image(data'length-1));
+        i2c_dbg("sending data bit: " & integer'image(i) & " Value: " & to_string(data(i)));
+        i2c_clk(data(i));
+        bit_cnt := bit_cnt+1;
+        if bit_cnt = 8 then
+          bit_cnt := 0;
+          i2c_get_ack;
+        end if;
+      end loop;  -- i
       i2c_stop;
       i2c_idle;
     end procedure i2c_write;
@@ -213,14 +229,25 @@ begin  -- architecture testbench
   begin
     printf("start i2c simulation: ...");
     info(i2c_log);
-    i2c_dbg("TC0: write 0xAA to the slave address");
-    i2c_write(SLAVE_ADDR, x"AA");
+    i2c_dbg("********************************************************************************");
+    i2c_dbg("TC0: write 0xAA to the slave1 address");
+    i2c_dbg("********************************************************************************");
+    i2c_write(SLAVE_ADDR1, x"AA");
     wait for 100 us;
+    i2c_dbg("********************************************************************************");
     i2c_dbg("TC1: write 0xAA to the wrong slave address. no one should ack the address.");
-    i2c_write((not SLAVE_ADDR), x"AA");
+    i2c_dbg("********************************************************************************");
+    i2c_write((not SLAVE_ADDR1), x"AA");
     wait for 100 us;
-    i2c_dbg("TC2: write 0xAAAAAA to the slave address");
-    i2c_write(SLAVE_ADDR, x"AAAAAA");
+    i2c_dbg("********************************************************************************");
+    i2c_dbg("TC2: write 0xAAAAAA to the slave1 address");
+    i2c_dbg("********************************************************************************");
+    i2c_write(SLAVE_ADDR1, x"AAAAAA");
+    wait for 100 us;
+    i2c_dbg("********************************************************************************");
+    i2c_dbg("TC3: write 0xAAAAAA to the slave2 address");
+    i2c_dbg("********************************************************************************");
+    i2c_write(SLAVE_ADDR2, x"AAAAAA");
     wait for 100 us;
     stop_clk <= '1';
     i2c_dbg("stop simulation without errors." & LF & "runtime: " & time'image(now));

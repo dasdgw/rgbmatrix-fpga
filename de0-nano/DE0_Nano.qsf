@@ -51,7 +51,8 @@ set_global_assignment -name VHDL_FILE ../vhdl/jtag_memory.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/i2c_memory.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/ledctrl.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/jtag_iface.vhd
-set_global_assignment -name VHDL_FILE ../vhdl/i2c_iface.vhd
+#set_global_assignment -name VHDL_FILE ../vhdl/i2c_iface.vhd
+set_global_assignment -name VHDL_FILE ../vhdl/i2c_slave.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/clk_div.vhd
 set_global_assignment -name VHDL_FILE de0_nano.vhd
 set_global_assignment -name SIGNALTAP_FILE signaltap/de0nano.stp

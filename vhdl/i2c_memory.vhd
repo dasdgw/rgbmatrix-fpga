@@ -28,7 +28,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.std_logic_unsigned.all;
+--use ieee.std_logic_unsigned.all;
 
 use work.rgbmatrix_pkg.all;
 
@@ -37,8 +37,7 @@ entity i2c_memory is
     rst    : in  std_logic;
     clk_wr : in  std_logic;
     wr     : in  std_logic;
-    waddr  : in  std_logic_vector(ADDR_WIDTH downto 0);
-    input  : in  std_logic_vector(DATA_WIDTH/2-1 downto 0);
+    input  : in  std_logic_vector(DATA_WIDTH/6-1 downto 0);
     clk_rd : in  std_logic;
     addr   : in  std_logic_vector(ADDR_WIDTH-1 downto 0);
     output : out std_logic_vector(DATA_WIDTH-1 downto 0)
@@ -47,11 +46,15 @@ end i2c_memory;
 
 architecture bhv of i2c_memory is
   -- Internal signals
---  signal waddr, next_waddr : std_logic_vector(ADDR_WIDTH downto 0);
+  --signal waddr: integer range 0 to 2**ADDR_WIDTH;
+  signal waddr : unsigned(ADDR_WIDTH downto 0);
+
 
   -- Inferred RAM storage signal
-  type ram is array(2**ADDR_WIDTH-1 downto 0) of std_logic_vector(DATA_WIDTH/2-1 downto 0);
-  signal ram_block1, ram_block2 : ram;
+  type ram is array(2**ADDR_WIDTH-1 downto 0) of std_logic_vector(DATA_WIDTH/6-1 downto 0);
+  signal ram1r, ram1g, ram1b : ram;
+  signal ram2r, ram2g, ram2b : ram;
+  signal rgb                 : integer range 1 to 3;
 begin
 
   -- Create an adder to calculate the next write address
@@ -61,12 +64,37 @@ begin
   process(clk_wr)
   begin
     if(rising_edge(clk_wr)) then
-      if wr = '1' then
-        -- store input at the current write address
-        if waddr(waddr'high) = '0' then
-          ram_block1(conv_integer(waddr(waddr'high-1 downto 0))) <= input;  --(DATA_WIDTH/2-1 downto 0);
+      if rst = '1' then
+        waddr <= (others => '0');
+        rgb   <= 1;
+      elsif wr = '1' then
+        if rgb < 3 then
+          rgb <= rgb+1;
         else
-          ram_block2(conv_integer(waddr(waddr'high-1 downto 0))) <= input;  --(DATA_WIDTH-1 downto DATA_WIDTH/2);
+          rgb   <= 1;
+          waddr <= waddr + 1;
+        end if;
+-- store input at the current write address
+        if waddr(waddr'high) = '0' then
+          if rgb=1 then
+            ram1r(to_integer(waddr(waddr'high-1 downto 0))) <= input;
+          end if;
+          if rgb=2 then
+            ram1g(to_integer(waddr(waddr'high-1 downto 0))) <= input;
+          end if;
+          if rgb=3 then
+            ram1b(to_integer(waddr(waddr'high-1 downto 0))) <= input;
+          end if;
+        else
+          if rgb=1 then
+            ram2r(to_integer(waddr(waddr'high-1 downto 0))) <= input;
+          end if;
+          if rgb=2 then
+            ram2g(to_integer(waddr(waddr'high-1 downto 0))) <= input;
+          end if;
+          if rgb=3 then
+            ram2b(to_integer(waddr(waddr'high-1 downto 0))) <= input;
+          end if;
         end if;
 --        waddr <= next_waddr;  -- allow the write address to increment    
       end if;
@@ -77,7 +105,12 @@ begin
   process(clk_rd)
   begin
     if(rising_edge(clk_rd)) then
-      output <= ram_block2(conv_integer(addr)) & ram_block1(conv_integer(addr));  -- retrieve contents at the given read address
+      output <= ram2r(to_integer(unsigned(addr))) &
+                ram2g(to_integer(unsigned(addr))) &
+                ram2b(to_integer(unsigned(addr))) &
+                ram1r(to_integer(unsigned(addr))) &
+                ram1g(to_integer(unsigned(addr))) &
+                ram1b(to_integer(unsigned(addr)));
     end if;
   end process;
 

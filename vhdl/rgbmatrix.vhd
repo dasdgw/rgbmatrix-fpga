@@ -56,10 +56,11 @@ architecture str of rgbmatrix is
   signal addr          : std_logic_vector(ADDR_WIDTH-1 downto 0);
   signal data_incoming : std_logic_vector(DATA_WIDTH-1 downto 0);
   signal data_outgoing : std_logic_vector(DATA_WIDTH-1 downto 0);
-  signal rgb           : std_logic_vector(DATA_WIDTH/2-1 downto 0);
+  signal rgb           : std_logic_vector(DATA_WIDTH/6-1 downto 0);
   signal waddr         : std_logic_vector(ADDR_WIDTH downto 0);
 -- Flags
-  signal data_valid    : std_logic;
+  signal valid1        : std_logic;
+  signal valid2        : std_logic;
   signal tck           : std_logic;
 begin
 
@@ -101,7 +102,7 @@ begin
         rst     => rst_p,
         rst_out => jtag_rst_out,
         output  => data_incoming,
-        valid   => data_valid,
+        valid   => valid1,
         tck     => tck
         );
 
@@ -110,7 +111,7 @@ begin
       port map (
         rst    => rst,
         -- Writing side
-        clk_wr => data_valid,
+        clk_wr => valid1,
         input  => data_incoming,
         -- Reading side
         clk_rd => clk_in,
@@ -121,27 +122,40 @@ begin
   end generate jtag;
 
   i2c : if IFACE = "i2c" generate
-    i2c_iface_1 : entity work.i2c_iface
+    --i2c_iface_1 : entity work.i2c_iface
+    --  generic map (
+    --    SLAVE_ADDR => SLAVE_ADDR)       -- [std_logic_vector(6 downto 0)]
+    --  port map (
+    --    clk      => clk_in,             -- [in  std_logic]
+    --    rst      => rst_p,              -- [in  std_logic]
+    --    rst_out  => jtag_rst_out,       -- [out std_logic]
+    --    waddr    => waddr,  -- [out std_logic_vector(ADDR_WIDTH downto 0)]
+    --    output   => rgb,  --data_incoming,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
+    --    valid    => data_valid,         -- [out std_logic]
+    --    i2c_sdat => i2c_sdat,           -- [inout std_logic]
+    --    i2c_sclk => i2c_sclk);          -- [inout std_logic]
+
+    i2c_slave_1 : entity work.i2c_slave
       generic map (
-        SLAVE_ADDR => SLAVE_ADDR)       -- [std_logic_vector(6 downto 0)]
+        SLAVE_ADDR1 => SLAVE_ADDR1,     -- [std_logic_vector(6 downto 0)]
+        SLAVE_ADDR2 => SLAVE_ADDR2)     -- [std_logic_vector(6 downto 0)]
       port map (
         clk      => clk_in,             -- [in  std_logic]
         rst      => rst_p,              -- [in  std_logic]
-        rst_out  => jtag_rst_out,       -- [out std_logic]
-        waddr    => waddr,  -- [out std_logic_vector(ADDR_WIDTH downto 0)]
-        output   => rgb,  --data_incoming,  -- [out std_logic_vector(DATA_WIDTH-1 downto 0)]
-        valid    => data_valid,         -- [out std_logic]
+        data_o   => rgb,                -- [out std_logic_vector(7 downto 0)]
+        valid1   => valid1,             -- [out std_logic]
+        valid2   => valid2,             -- [out std_logic]
         i2c_sdat => i2c_sdat,           -- [inout std_logic]
         i2c_sclk => i2c_sclk);          -- [inout std_logic]
 
     -- Special memory for the framebuffer
     i2c_memory_1 : entity work.i2c_memory
       port map (
-        rst    => rst,
+        rst    => valid2,
         -- Writing side
         clk_wr => clk_in,
-        wr     => data_valid,
-        waddr  => waddr,
+        wr     => valid1,
+--        waddr  => waddr,
         input  => rgb,                  --data_incoming,
         -- Reading side
         clk_rd => clk_in,
