@@ -151,7 +151,7 @@ begin  -- architecture testbench
     end procedure i2c_write_cmd;
 
 -- purpose: send 7-bit i2c address. after this i2c_write_cmd or i2c_read_cmd
--- shold be sent
+-- should be sent
 -- examples: i2c__address;
     procedure i2c_send_address(addr : in std_logic_vector) is
     begin
