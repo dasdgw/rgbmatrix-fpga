@@ -12,3 +12,6 @@ greybox_tmp/
 /vhdl/testbenches/i2c_iface/modelsim/vsim.wlf
 /vhdl/testbenches/rgbmatrix/modelsim/transcript
 /vhdl/testbenches/rgbmatrix/modelsim/vsim.wlf
+/doc/doxygen/html/
+/doc/doxygen/latex/
+
