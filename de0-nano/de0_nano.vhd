@@ -6,7 +6,7 @@ use ieee.numeric_std.all;
 --!
 --! rgbmatrix |               de0nano               | rgbmatrix
 --!
---!                            GPIO-0
+--!                            GPIO-0 (JP1)
 --!                           ---------
 --!             GPIO_0_IN[0]  |01   02|  GPIO_0[0]
 --!             GPIO_0_IN[1]  |03   04|  GPIO_0[1]
@@ -28,6 +28,34 @@ use ieee.numeric_std.all;
 --!       b     GPIO_0[28]    |35   36|  GPIO_0[29]   a
 --!       c     GPIO_0[30]    |37   38|  GPIO_0[31]   latch
 --!       clk   GPIO_0[32]    |39   40|  GPIO_0[33]   oe
+--!                           ---------
+
+--! pinning de0nano <-> i2c
+--!
+--!    i2c    |               de0nano               | i2c
+--!
+--!                            GPIO-1 (JP2)
+--!                           ---------
+--!             GPIO_1_IN[0]  |01   02|  GPIO_1[0]   SDA
+--!             GPIO_1_IN[1]  |03   04|  GPIO_1[1]   SCL
+--!             GPIO_1[2]     |05   06|  GPIO_1[3]
+--!             GPIO_1[4]     |07   08|  GPIO_1[5]
+--!             GPIO_1[6]     |09   10|  GPIO_1[7]
+--!             VCC_SYS       |11   12|  GND          gnd
+--!             GPIO_1[8]     |13   14|  GPIO_1[9]
+--!             GPIO_1[10]    |15   16|  GPIO_1[11]
+--!             GPIO_1[12]    |17   18|  GPIO_1[13]
+--!             GPIO_1[14]    |19   20|  GPIO_1[15]
+--!             GPIO_1[16]    |21   22|  GPIO_1[17]
+--!             GPIO_1[18]    |23   24|  GPIO_1[19]
+--!             GPIO_1[20]    |25   26|  GPIO_1[21]
+--!             GPIO_1[22]    |27   28|  GPIO_1[23]
+--!             VCC_SYS       |29   30|  GND          gnd
+--!             GPIO_1[24]    |31   32|  GPIO_1[25]
+--!             GPIO_1[26]    |33   34|  GPIO_1[27]
+--!             GPIO_1[28]    |35   36|  GPIO_1[29]
+--!             GPIO_1[30]    |37   38|  GPIO_1[31]
+--!             GPIO_1[32]    |39   40|  GPIO_1[33]
 --!                           ---------
 
 entity de0_nano is
