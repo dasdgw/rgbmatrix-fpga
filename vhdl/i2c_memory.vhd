@@ -37,6 +37,7 @@ entity i2c_memory is
     rst    : in  std_logic;
     clk_wr : in  std_logic;
     wr     : in  std_logic;
+-- warum nicht (PIXEL_DEPTH-1 downto 0);?
     input  : in  std_logic_vector(DATA_WIDTH/6-1 downto 0);
     clk_rd : in  std_logic;
     addr   : in  std_logic_vector(ADDR_WIDTH-1 downto 0);
