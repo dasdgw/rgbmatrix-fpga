@@ -7,3 +7,8 @@ greybox_tmp/
 /de0-nano/DE0_Nano.jdi
 /de0-nano/DE0_Nano.tis_db_list.ddb
 /de0-nano/PLLJ_PLLSPE_INFO.txt
+/vhdl/testbenches/i2c_iface/modelsim/i2c.log
+/vhdl/testbenches/i2c_iface/modelsim/transcript
+/vhdl/testbenches/i2c_iface/modelsim/vsim.wlf
+/vhdl/testbenches/rgbmatrix/modelsim/transcript
+/vhdl/testbenches/rgbmatrix/modelsim/vsim.wlf

@@ -78,12 +78,16 @@ begin  -- architecture testbench
 
   -- clock generation
   clk <= not clk after 10 ns when stop_clk /= '1' else '0';
+  clk_in <= clk;
+
 
   -- waveform generation
   WaveGen_Proc: process
   begin
     -- insert signal assignments here
-    
+
+    wait for 10 us;
+
     -- stop clock from toggling
     stop_clk <= '1';
     wait;
