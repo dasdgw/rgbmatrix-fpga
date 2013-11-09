@@ -16,7 +16,7 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2013-11-09  0.1      dasdgw	Created
+-- 2013-11-09  0.1      dasdgw  Created
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -51,13 +51,13 @@ architecture testbench of rgbmatrix_tb is
   signal i2c_sclk : std_logic;          -- [inout]
 
   -- clock
-  signal clk : std_logic := '1';
+  signal clk      : std_logic := '1';
   signal stop_clk : std_logic := '0';   -- set this to '1' when done
 
 begin  -- architecture testbench
 
   -- component instantiation
-  DUT: entity work.rgbmatrix
+  DUT : entity work.rgbmatrix
     port map (
       clk_in   => clk_in,               -- [in  std_logic]
       rst_n    => rst_n,                -- [in  std_logic]
@@ -76,13 +76,16 @@ begin  -- architecture testbench
       i2c_sdat => i2c_sdat,             -- [inout std_logic]
       i2c_sclk => i2c_sclk);            -- [inout std_logic]
 
-  -- clock generation
-  clk <= not clk after 10 ns when stop_clk /= '1' else '0';
   clk_in <= clk;
 
+  -- clock generation
+  clk <= not clk after 10 ns when stop_clk /= '1' else '0';
+
+  -- generate reset signal
+  rst_n <= '1', '0' after 100 ns, '1' after 200 ns;
 
   -- waveform generation
-  WaveGen_Proc: process
+  WaveGen_Proc : process
   begin
     -- insert signal assignments here
 
@@ -93,7 +96,7 @@ begin  -- architecture testbench
     wait;
   end process WaveGen_Proc;
 
-  
+
 
 end architecture testbench;
 
