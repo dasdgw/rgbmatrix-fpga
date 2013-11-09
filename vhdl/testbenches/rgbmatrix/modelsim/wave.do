@@ -1,7 +1,11 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-wave zoom full
-add wave *
+# if you only want to see the top-level signals add:
+# add wave *
+# if you want to have every signal in the waveviewer use:
+add wave -r /*
+# if you want to add single signal use something like:
+#add wave -noupdate /rgbmatrix_tb/DUT/i2c/i2c_memory_1/addr
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1090040000 ps} 0}
 quietly wave cursor active 1
@@ -19,3 +23,4 @@ configure wave -griddelta 40
 configure wave -timeline 1
 configure wave -timelineunits ns
 update
+
