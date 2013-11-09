@@ -1,0 +1,28 @@
+*erstellen neuer testbenches
+im testbenchs ordner einen neuen ordner für das zu testende modul anlegen.
+Bsp rgbmatrix.vhd -> testbenches/rgbmatrix
+im emacs rgmatrix.vhd öffnen
+port kopieren ->
+c-c, c-p, c-w
+testbench rumpf erstellen ->
+c-c, c-p, c-t
+bei architecture testbench eintrage
+<modulname>_tb.vhd nach testbenches/<modulname>/tb verschieben
+modelsim ordner kopieren
+makefile und modelsim.do müssen nicht angepasst werden
+comp.do muss für jedes projekt angepasst werden
+aufbau:
+#+BEGIN_SRC bash
+vlib work
+vcom -work work -2008 ../../<source1>.vhd
+vcom -work work -2008 ../../<source2>.vhd
+vcom -work work -2008 ../tb/<DUT>.vhd
+vcom -work work -2008 ../tb/<DUT>_tb.vhd
+#+END_SRC
+
+
+
+in run.do können log datein gelöscht werden
+bsp "file delete i2c.log"
+dann testbench entity namen an vsim work. anfügen
+Bsp: vsim work.i2c_iface_tb
