@@ -53,9 +53,12 @@ architecture bhv of i2c_memory is
 
   -- Inferred RAM storage signal
   type ram is array(2**ADDR_WIDTH-1 downto 0) of std_logic_vector(DATA_WIDTH/6-1 downto 0);
-  signal ram1r, ram1g, ram1b : ram;
-  signal ram2r, ram2g, ram2b : ram;
-  signal rgb                 : integer range 1 to 3;
+  --signal ram1r: ram:=(others => (others => '1'));
+  signal ram1r        : ram := (others => x"FF");
+  signal ram1g, ram1b : ram;
+  signal ram2r        : ram := (1      => x"00", others => x"FF");
+  signal ram2g, ram2b : ram;
+  signal rgb          : integer range 1 to 3;
 begin
 
   -- Create an adder to calculate the next write address
@@ -77,23 +80,23 @@ begin
         end if;
 -- store input at the current write address
         if waddr(waddr'high) = '0' then
-          if rgb=1 then
+          if rgb = 1 then
             ram1r(to_integer(waddr(waddr'high-1 downto 0))) <= input;
           end if;
-          if rgb=2 then
+          if rgb = 2 then
             ram1g(to_integer(waddr(waddr'high-1 downto 0))) <= input;
           end if;
-          if rgb=3 then
+          if rgb = 3 then
             ram1b(to_integer(waddr(waddr'high-1 downto 0))) <= input;
           end if;
         else
-          if rgb=1 then
+          if rgb = 1 then
             ram2r(to_integer(waddr(waddr'high-1 downto 0))) <= input;
           end if;
-          if rgb=2 then
+          if rgb = 2 then
             ram2g(to_integer(waddr(waddr'high-1 downto 0))) <= input;
           end if;
-          if rgb=3 then
+          if rgb = 3 then
             ram2b(to_integer(waddr(waddr'high-1 downto 0))) <= input;
           end if;
         end if;
