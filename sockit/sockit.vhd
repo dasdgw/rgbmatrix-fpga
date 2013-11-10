@@ -71,7 +71,7 @@ entity sockit is
     GPIO_0 : out std_logic_vector(33 downto 22);
 
 --      //////////// GPIO_1, GPIO_1 connect to GPIO Default //////////
-    debug : out   std_logic_vector(1 downto 0);
+    --debug : out   std_logic_vector(1 downto 0);
     SDA   : inout std_logic;
     SCL   : inout std_logic
     );
@@ -127,7 +127,7 @@ begin  -- structural
       i2c_sclk => SCL);                 -- [inout std_logic]
 
   rst_n <= locked;
-  debug <= SCL & SDA;
+  --debug <= SCL & SDA;
 
 --  GPIO_0(33 downto 22) <= g1 & r1 & b1 & g2 & r2 & b2 & b & a & c & lat & clk_out & oe;
 
