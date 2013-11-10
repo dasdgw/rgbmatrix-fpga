@@ -1,7 +1,7 @@
 *erstellen neuer testbenches
 im testbenchs ordner einen neuen ordner für das zu testende modul anlegen.
 Bsp rgbmatrix.vhd -> testbenches/rgbmatrix
-im emacs rgmatrix.vhd öffnen
+im emacs rgbmatrix.vhd öffnen
 port kopieren ->
 c-c, c-p, c-w
 testbench rumpf erstellen ->
