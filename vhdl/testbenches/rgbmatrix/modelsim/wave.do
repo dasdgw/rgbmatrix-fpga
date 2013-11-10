@@ -6,6 +6,8 @@ quietly WaveActivateNextPane {} 0
 add wave -r /*
 # if you want to add single signal use something like:
 #add wave -noupdate /rgbmatrix_tb/DUT/i2c/i2c_memory_1/addr
+# to seperate waves add:
+# add wave -noupdate -divider rgbmatrix
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {1090040000 ps} 0}
 quietly wave cursor active 1
