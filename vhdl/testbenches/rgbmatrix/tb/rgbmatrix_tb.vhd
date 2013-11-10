@@ -6,7 +6,7 @@
 -- Author     :   <dasdgw@karel.dhcp.heaven>
 -- Company    : frankalicious
 -- Created    : 2013-11-09
--- Last update: 2013-11-09
+-- Last update: 2013-11-10
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -21,6 +21,10 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use std.textio.all;
+use work.util_pkg.all;
+use work.rgbmatrix_pkg.all;
 
 -------------------------------------------------------------------------------
 
@@ -53,6 +57,13 @@ architecture testbench of rgbmatrix_tb is
   -- clock
   signal clk      : std_logic := '1';
   signal stop_clk : std_logic := '0';   -- set this to '1' when done
+
+  constant rgbmatrix_log : log_type := (false, true, "rgbmatrix.log");
+
+  procedure rgbmatrix_dbg(msg : in string) is
+  begin
+    printf(rgbmatrix_log, msg);
+  end procedure rgbmatrix_dbg;
 
 begin  -- architecture testbench
 
@@ -96,7 +107,26 @@ begin  -- architecture testbench
     wait;
   end process WaveGen_Proc;
 
-
+-- purpose: report the configuration
+  rpt_cfg : process is
+  begin  -- process rpt_cfg
+--    wait until stop_clk = '1';
+    info(rgbmatrix_log);
+    rgbmatrix_dbg("ledrgbmatrix configuration");
+    rgbmatrix_dbg("--------------------------");
+    rgbmatrix_dbg("interface: " & IFACE);
+--    rgbmatrix_dbg(" 1" & SLAVE_ADDR1);
+--    rgbmatrix_dbg(" 1" & SLAVE_ADDR2);
+    rgbmatrix_dbg("NUM_PANELS:      " & integer'image(NUM_PANELS));
+    rgbmatrix_dbg("PIXEL_DEPTH:     " & integer'image(PIXEL_DEPTH));
+    rgbmatrix_dbg("PANEL_WIDTH:     " & integer'image(PANEL_WIDTH));
+    rgbmatrix_dbg("PANEL_HEIGHT:    " & integer'image(PANEL_HEIGHT));
+    rgbmatrix_dbg("DATA_WIDTH:      " & integer'image(DATA_WIDTH));
+    rgbmatrix_dbg("ADDR_WIDTH:      " & integer'image(ADDR_WIDTH));
+    rgbmatrix_dbg("IMG_WIDTH:       " & integer'image(IMG_WIDTH));
+    rgbmatrix_dbg("IMG_WIDTH_LOG2:  " & integer'image(IMG_WIDTH_LOG2));
+    wait;
+  end process rpt_cfg;
 
 end architecture testbench;
 

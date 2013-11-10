@@ -1,0 +1,99 @@
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
+      0 ns: ledrgbmatrix configuration
+      0 ns: --------------------------
+      0 ns: interface: i2c
+      0 ns: NUM_PANELS:      1
+      0 ns: PIXEL_DEPTH:     8
+      0 ns: PANEL_WIDTH:     32
+      0 ns: PANEL_HEIGHT:    16
+      0 ns: DATA_WIDTH:      48
+      0 ns: ADDR_WIDTH:      8
+      0 ns: IMG_WIDTH:       32
+      0 ns: IMG_WIDTH_LOG2:  5
