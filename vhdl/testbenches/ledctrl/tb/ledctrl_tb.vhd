@@ -92,7 +92,7 @@ begin  -- architecture testbench
     wait for 50 ns;
     wait;
   end process;
-
+--TODO: data should be changed according to the addr signal from ledctrl.
 end architecture testbench;
 
 -------------------------------------------------------------------------------
