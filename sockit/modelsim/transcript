@@ -1,0 +1,26 @@
+# vsim -do {run -all} work.heartbeat_tb 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.heartbeat_tb(testbench)
+# Loading work.heartbeat(syn)
+# run -all 
+run
+vcom -reportprogress 300 -work work heartbeat_tb.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity heartbeat_tb
+# -- Compiling architecture testbench of heartbeat_tb
+# -- Loading package NUMERIC_STD
+# -- Loading entity heartbeat
+# -- Compiling configuration heartbeat_tb_testbench_cfg
+# -- Loading entity heartbeat_tb
+# -- Loading architecture testbench of heartbeat_tb
+run
+restart
+# Loading work.heartbeat_tb(testbench)
+run
+run
