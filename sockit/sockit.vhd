@@ -71,7 +71,7 @@ entity sockit is
     GPIO_0 : out std_logic_vector(33 downto 22);
 
 --      //////////// GPIO_1, GPIO_1 connect to GPIO Default //////////
-    debug : out std_logic_vector(1 downto 0);
+    debug : out   std_logic_vector(1 downto 0);
     SDA   : inout std_logic;
     SCL   : inout std_logic
     );
@@ -83,29 +83,29 @@ architecture structural of sockit is
   signal clk_10MHz : std_logic             := '0';
   signal locked    : std_logic             := '0';
 
-  signal rst_n       : std_logic;       -- [in]
-  signal clk_out     : std_logic;       -- [out]
-  signal r1          : std_logic;       -- [out]
-  signal r2          : std_logic;       -- [out]
-  signal b1          : std_logic;       -- [out]
-  signal b2          : std_logic;       -- [out]
-  signal g1          : std_logic;       -- [out]
-  signal g2          : std_logic;       -- [out]
-  signal a           : std_logic;       -- [out]
-  signal b           : std_logic;       -- [out]
-  signal c           : std_logic;       -- [out]
-  signal lat         : std_logic;       -- [out]
-  signal oe          : std_logic;       -- [out]
-  
+  signal rst_n   : std_logic;           -- [in]
+  signal clk_out : std_logic;           -- [out]
+  signal r1      : std_logic;           -- [out]
+  signal r2      : std_logic;           -- [out]
+  signal b1      : std_logic;           -- [out]
+  signal b2      : std_logic;           -- [out]
+  signal g1      : std_logic;           -- [out]
+  signal g2      : std_logic;           -- [out]
+  signal a       : std_logic;           -- [out]
+  signal b       : std_logic;           -- [out]
+  signal c       : std_logic;           -- [out]
+  signal lat     : std_logic;           -- [out]
+  signal oe      : std_logic;           -- [out]
+
 begin  -- structural
 
   pll1_1 : entity work.pll1
     port map (
-      areset => '0',                    -- [IN  STD_LOGIC  := '0']
-      inclk0 => OSC_50_B3B,               -- [IN  STD_LOGIC  := '0']
-      c0     => clk,                    -- [OUT STD_LOGIC]
-      c1     => clk_10MHz,
-      locked => locked);                -- [OUT STD_LOGIC]
+      refclk   => OSC_50_B3B,           -- [in  std_logic := '0'] refclk.clk
+      rst      => '0',                  -- [in  std_logic := '0'] reset.reset
+      outclk_0 => clk,                  -- [out std_logic] outclk0.clk
+      outclk_1 => clk_10MHz,            -- [out std_logic] outclk1.clk
+      locked   => locked);              -- [out std_logic] locked.export
 
   rgbmatrix_1 : entity work.rgbmatrix
     port map (
@@ -140,5 +140,5 @@ begin  -- structural
       LED     <= std_logic_vector(counter(31 downto 28));
     end if;
   end process led_test;
-  
+
 end structural;

@@ -49,7 +49,9 @@ set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO*
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO_0*
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SDA
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SCL
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_ADCDAT
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_ADCLRCK
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUD_BCLK
@@ -717,10 +719,10 @@ set_location_assignment PIN_J9 -to HSMC_RX_n[3]
 set_location_assignment PIN_K8 -to HSMC_RX_n[4]
 set_location_assignment PIN_H7 -to HSMC_RX_n[5]
 set_location_assignment PIN_G8 -to HSMC_RX_n[6]
-set_location_assignment PIN_F8 -to HSMC_RX_n[7]
+set_location_assignment PIN_F8 -to SDA
 set_location_assignment PIN_E11 -to HSMC_RX_n[8]
-set_location_assignment PIN_B5 -to GPIO[31]
-set_location_assignment PIN_D9 -to GPIO[25]
+set_location_assignment PIN_B5 -to GPIO_0[29]
+set_location_assignment PIN_D9 -to GPIO_0[25]
 set_location_assignment PIN_D12 -to HSMC_RX_n[11]
 set_location_assignment PIN_D10 -to HSMC_RX_n[12]
 set_location_assignment PIN_B12 -to HSMC_RX_n[13]
@@ -734,11 +736,11 @@ set_location_assignment PIN_J10 -to HSMC_RX_p[3]
 set_location_assignment PIN_K7 -to HSMC_RX_p[4]
 set_location_assignment PIN_J7 -to HSMC_RX_p[5]
 set_location_assignment PIN_H8 -to HSMC_RX_p[6]
-set_location_assignment PIN_F9 -to HSMC_RX_p[7]
+set_location_assignment PIN_F9 -to SCL
 set_location_assignment PIN_F11 -to HSMC_RX_p[8]
-set_location_assignment PIN_B6 -to HSMC_RX_p[9]
-set_location_assignment PIN_E9 -to GPIO[27]
-set_location_assignment PIN_E12 -to GPIO[23]
+set_location_assignment PIN_B6 -to GPIO_0[31]
+set_location_assignment PIN_E9 -to GPIO_0[27]
+set_location_assignment PIN_E12 -to GPIO_0[23]
 set_location_assignment PIN_D11 -to HSMC_RX_p[12]
 set_location_assignment PIN_C13 -to HSMC_RX_p[13]
 set_location_assignment PIN_F13 -to HSMC_RX_p[14]
@@ -755,10 +757,10 @@ set_location_assignment PIN_E2 -to HSMC_TX_n[5]
 set_location_assignment PIN_D4 -to HSMC_TX_n[6]
 set_location_assignment PIN_B3 -to HSMC_TX_n[7]
 set_location_assignment PIN_D1 -to HSMC_TX_n[8]
-set_location_assignment PIN_C2 -to GPIO[33]
-set_location_assignment PIN_B1 -to GPIO[32]
-set_location_assignment PIN_A3 -to GPIO[28]
-set_location_assignment PIN_A5 -to GPIO[24]
+set_location_assignment PIN_C2 -to GPIO_0[33]
+set_location_assignment PIN_B1 -to GPIO_0[32]
+set_location_assignment PIN_A3 -to GPIO_0[28]
+set_location_assignment PIN_A5 -to GPIO_0[24]
 set_location_assignment PIN_B7 -to HSMC_TX_n[13]
 set_location_assignment PIN_B8 -to HSMC_TX_n[14]
 set_location_assignment PIN_B11 -to HSMC_TX_n[15]
@@ -774,9 +776,9 @@ set_location_assignment PIN_C3 -to HSMC_TX_p[7]
 set_location_assignment PIN_E1 -to HSMC_TX_p[8]
 set_location_assignment PIN_D2 -to HSMC_TX_p[9]
 set_location_assignment PIN_B2 -to HSMC_TX_p[10]
-set_location_assignment PIN_A4 -to GPIO[30]
-set_location_assignment PIN_A6 -to GPIO[26]
-set_location_assignment PIN_C7 -to GPIO[22]
+set_location_assignment PIN_A4 -to GPIO_0[30]
+set_location_assignment PIN_A6 -to GPIO_0[26]
+set_location_assignment PIN_C7 -to GPIO_0[22]
 set_location_assignment PIN_C8 -to HSMC_TX_p[14]
 set_location_assignment PIN_C12 -to HSMC_TX_p[15]
 set_location_assignment PIN_B13 -to HSMC_TX_p[16]
