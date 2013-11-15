@@ -53,7 +53,7 @@ architecture bhv of i2c_memory is
 
   -- Inferred RAM storage signal
   type ram is array(2**ADDR_WIDTH-1 downto 0) of std_logic_vector(DATA_WIDTH/6-1 downto 0);
-  signal ram1r, ram1g, ram1b : ram;
+  signal ram1r, ram1g, ram1b : ram:=(others => (others => '1'));
   signal ram2r, ram2g, ram2b : ram;
   signal rgb                 : integer range 1 to 3;
 begin
