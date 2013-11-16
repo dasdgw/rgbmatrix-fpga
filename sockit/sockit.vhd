@@ -1,4 +1,5 @@
 library ieee;
+library sockit_system;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
@@ -72,8 +73,8 @@ entity sockit is
 
 --      //////////// GPIO_1, GPIO_1 connect to GPIO Default //////////
     --debug : out   std_logic_vector(1 downto 0);
-    SDA   : inout std_logic;
-    SCL   : inout std_logic
+    SDA : inout std_logic;
+    SCL : inout std_logic
     );
 end;
 
@@ -99,32 +100,50 @@ architecture structural of sockit is
 
 begin  -- structural
 
-  pll1_1 : entity work.pll1
-    port map (
-      refclk   => OSC_50_B3B,           -- [in  std_logic := '0'] refclk.clk
-      rst      => '0',                  -- [in  std_logic := '0'] reset.reset
-      outclk_0 => clk,                  -- [out std_logic] outclk0.clk
-      outclk_1 => clk_10MHz,            -- [out std_logic] outclk1.clk
-      locked   => locked);              -- [out std_logic] locked.export
+--  pll1_1 : entity work.pll1
+--    port map (
+--      refclk   => OSC_50_B3B,           -- [in  std_logic := '0'] refclk.clk
+--      rst      => '0',                  -- [in  std_logic := '0'] reset.reset
+--      outclk_0 => clk,                  -- [out std_logic] outclk0.clk
+--      outclk_1 => clk_10MHz,            -- [out std_logic] outclk1.clk
+--      locked   => locked);              -- [out std_logic] locked.export
+-- 
+--  rgbmatrix_1 : entity work.rgbmatrix
+--    port map (
+--      clk_in   => clk_10MHz,            -- [in  std_logic]
+--      rst_n    => rst_n,                -- [in  std_logic]
+--      clk_out  => clk_out,              -- [out std_logic]
+--      r1       => r1,                   -- [out std_logic]
+--      r2       => r2,                   -- [out std_logic]
+--      b1       => b1,                   -- [out std_logic]
+--      b2       => b2,                   -- [out std_logic]
+--      g1       => g1,                   -- [out std_logic]
+--      g2       => g2,                   -- [out std_logic]
+--      a        => a,                    -- [out std_logic]
+--      b        => b,                    -- [out std_logic]
+--      c        => c,                    -- [out std_logic]
+--      lat      => lat,                  -- [out std_logic]
+--      oe       => oe,                   -- [out std_logic]
+--      i2c_sdat => SDA,                  -- [inout std_logic]
+--      i2c_sclk => SCL);                 -- [inout std_logic]
 
-  rgbmatrix_1 : entity work.rgbmatrix
+  sockit_system_1 : entity sockit_system.sockit_system
     port map (
-      clk_in   => clk_10MHz,            -- [in  std_logic]
-      rst_n    => rst_n,                -- [in  std_logic]
-      clk_out  => clk_out,              -- [out std_logic]
-      r1       => r1,                   -- [out std_logic]
-      r2       => r2,                   -- [out std_logic]
-      b1       => b1,                   -- [out std_logic]
-      b2       => b2,                   -- [out std_logic]
-      g1       => g1,                   -- [out std_logic]
-      g2       => g2,                   -- [out std_logic]
-      a        => a,                    -- [out std_logic]
-      b        => b,                    -- [out std_logic]
-      c        => c,                    -- [out std_logic]
-      lat      => lat,                  -- [out std_logic]
-      oe       => oe,                   -- [out std_logic]
-      i2c_sdat => SDA,                  -- [inout std_logic]
-      i2c_sclk => SCL);                 -- [inout std_logic]
+      rgb_matrix_0_clk_clk => clk_out,  -- [out std_logic] rgb_matrix_0_clk.clk
+      clk_clk              => OSC_50_B3B,  -- [in  std_logic := '0'] clk.clk
+      reset_reset_n        => '1',  --rst_n,  -- [in  std_logic := '0'] reset.reset_n
+      rgb_matrix_0_out_g1  => g1,       -- [out std_logic] rgb_matrix_0_out.g1
+      rgb_matrix_0_out_g2  => g2,       -- [out std_logic] .g2
+      rgb_matrix_0_out_a   => a,        -- [out std_logic] .a
+      rgb_matrix_0_out_b   => b,        -- [out std_logic] .b
+      rgb_matrix_0_out_lat => lat,      -- [out std_logic] .lat
+      rgb_matrix_0_out_c   => c,        -- [out std_logic] .c
+      rgb_matrix_0_out_oe  => oe,       -- [out std_logic] .oe
+      rgb_matrix_0_out_r1  => r1,       -- [out std_logic] .r1
+      rgb_matrix_0_out_r2  => r2,       -- [out std_logic] .r2
+      rgb_matrix_0_out_b1  => b1,       -- [out std_logic] .b1
+      rgb_matrix_0_out_b2  => b2        --);  -- [out std_logic] .b2
+      );
 
   rst_n <= locked;
   --debug <= SCL & SDA;

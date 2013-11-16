@@ -22,11 +22,21 @@ program_flash:
 
 quartus:
 	quartus $(QUARTUS_OPTS) sockit.qpf
+
+system_console:
+	system-console --desktop_script=system_console.tcl
+
 clean:
 	rm -rf incremental_db
 	rm -rf db
 	rm -rf greybox_tmp
 	rm -rf build/*
+
+clean_qsys_system:
+	rm -rf sockit_system/*
+	rm -rf sockit_system.cmp
+	rm -rf sockit_system.sopcinfo
+	rm -rf *.rpt
 
 tags:
 	exuberant-ctags -Re
