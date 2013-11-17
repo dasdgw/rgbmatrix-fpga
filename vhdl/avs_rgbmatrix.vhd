@@ -32,7 +32,7 @@ entity avs_rgbmatrix is
     clk   : in std_logic;
     reset : in std_logic;
 
-    avs_s0_address     : in  std_logic_vector(7 downto 0)  := (others => '0');  --    s0.address
+    avs_s0_address     : in  std_logic_vector(10 downto 0)  := (others => '0');  --    s0.address
     avs_s0_read        : in  std_logic                     := '0';  --      .read
     avs_s0_readdata    : out std_logic_vector(31 downto 0);  --      .readdata
     avs_s0_write       : in  std_logic                     := '0';  --      .write
