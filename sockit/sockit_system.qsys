@@ -16,7 +16,7 @@
    {
       datum baseAddress
       {
-         value = "1024";
+         value = "8192";
          type = "String";
       }
    }
@@ -39,11 +39,6 @@
       {
          value = "1";
          type = "boolean";
-      }
-      datum baseAddress
-      {
-         value = "0";
-         type = "String";
       }
    }
    element master_0
@@ -342,7 +337,7 @@
   <parameter name="AUTO_CLK_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone V" />
  </module>
- <module kind="rgb_matrix" version="0.9.1" enabled="1" name="rgb_matrix_0">
+ <module kind="rgb_matrix" version="0.9.3" enabled="1" name="rgb_matrix_0">
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
   <parameter name="AUTO_CLOCK_SINK_CLOCK_RATE" value="10000000" />
  </module>
@@ -365,11 +360,6 @@
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
- <connection
-   kind="clock"
-   version="13.1"
-   start="clk_0.clk"
-   end="rgb_matrix_0.clock" />
  <connection kind="clock" version="13.1" start="clk_0.clk" end="pll_0.refclk" />
  <connection kind="reset" version="13.1" start="clk_0.clk_reset" end="pll_0.reset" />
  <connection
@@ -389,7 +379,7 @@
    start="master_0.master"
    end="rgb_matrix_0.avalon_slave_0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x0400" />
+  <parameter name="baseAddress" value="0x2000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -397,6 +387,11 @@
    version="13.1"
    start="pll_0.outclk1"
    end="rgb_matrix_0.clock_sink" />
+ <connection
+   kind="clock"
+   version="13.1"
+   start="pll_0.outclk0"
+   end="rgb_matrix_0.clock" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="false" />
