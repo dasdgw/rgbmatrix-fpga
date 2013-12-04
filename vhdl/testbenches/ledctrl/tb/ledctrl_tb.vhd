@@ -6,7 +6,7 @@
 -- Author     :   <alex@alex_laptop>
 -- Company    : frankalicious
 -- Created    : 2013-11-09
--- Last update: 2013-11-10
+-- Last update: 2013-12-01
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -16,7 +16,7 @@
 -------------------------------------------------------------------------------
 -- Revisions  :
 -- Date        Version  Author  Description
--- 2013-11-09  0.1      alex	Created
+-- 2013-11-09  0.1      alex    Created
 -------------------------------------------------------------------------------
 
 library ieee;
@@ -33,7 +33,7 @@ end entity ledctrl_tb;
 architecture testbench of ledctrl_tb is
 
   -- component ports
-  signal clk      : std_logic := '1';                                -- [in]
+  signal clk      : std_logic := '1';                         -- [in]
   signal rst      : std_logic;                                -- [in]
   signal clk_out  : std_logic;                                -- [out]
   signal rgb1     : std_logic_vector(2 downto 0);             -- [out]
@@ -51,7 +51,7 @@ architecture testbench of ledctrl_tb is
 begin  -- architecture testbench
 
   -- component instantiation
-  DUT: entity work.ledctrl
+  DUT : entity work.ledctrl
     port map (
       clk      => clk,                  -- [in  std_logic]
       rst      => rst,                  -- [in  std_logic]
@@ -64,34 +64,53 @@ begin  -- architecture testbench
       addr     => addr,      -- [out std_logic_vector(ADDR_WIDTH-1 downto 0)]
       data     => data);     -- [in  std_logic_vector(DATA_WIDTH-1 downto 0)]
 
-  -- clock generation
-  clk <= not clk after 10 ns when stop_clk /= '1' else '0';
-  rst <= '0', '1' after 20 ns, '0' after 30 ns;
+  rgbmatrix_hw_1: entity work.rgbmatrix_hw
+    port map (
+      clk      => clk_out,                  -- [in  std_logic]
+      rgb1     => rgb1,                 -- [in  std_logic_vector(2 downto 0)]
+      rgb2     => rgb2,                 -- [in  std_logic_vector(2 downto 0)]
+      led_addr => led_addr,             -- [in  std_logic_vector(2 downto 0)]
+      lat      => lat,                  -- [in  std_logic]
+      oe       => oe);                  -- [in  std_logic]
   
+  -- clock generation
+  clk <= not clk  after 10 ns when stop_clk /= '1' else '0';
+  rst <= '0', '1' after 20 ns, '0' after 30 ns;
+
   -- waveform generation
-  WaveGen_Proc: process
+  WaveGen_Proc : process
   begin
     -- insert signal assignments here
-    wait for 10 us;
+    wait for 2850 us;
     -- stop clock from toggling
     stop_clk <= '1';
     wait;
   end process WaveGen_Proc;
 
-  process
-  begin
-    -- insert signal assignments here
-    wait for 50 ns;
-    data <= (others => '1');
-    wait for 50 ns;
-    data <= (others => '0');
-    wait for 50 ns;
-    data <= (others => '1');
-    wait for 50 ns;
-    data <= (others => '0');
-    wait for 50 ns;
-    wait;
-  end process;
+  with addr select
+    data <=
+    (others => '1') when x"00",
+    (others => '0') when others;
+
+--  process
+--  begin
+--    data <= ram(addr);
+    --case addr is
+    --  when "000"  => data <= (others => '1');
+    --  when others => data <= (others => '0');  --null;
+    --end case;
+  -- insert signal assignments here
+--   wait for 50 ns;
+--   data <= (others => '1');
+--   wait for 50 ns;
+--   data <= (others => '0');
+--   wait for 50 ns;
+--   data <= (others => '1');
+--   wait for 50 ns;
+--   data <= (others => '0');
+--   wait for 50 ns;
+--   wait;
+--  end process;
 --TODO: data should be changed according to the addr signal from ledctrl.
 end architecture testbench;
 
