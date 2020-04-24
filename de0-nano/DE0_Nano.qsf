@@ -6,7 +6,7 @@ set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE22F17C6
 set_global_assignment -name TOP_LEVEL_ENTITY "DE0_Nano"
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 10.1
-set_global_assignment -name LAST_QUARTUS_VERSION 12.1
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:22:00 FEBRUARY 21,2011"
 set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 256
@@ -384,6 +384,7 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulati
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE signaltap/vjtag.stp
+
 set_global_assignment -name QIP_FILE clock/pll1.qip
 set_global_assignment -name VHDL_FILE ../vhdl/megawizard/megawizard_vjtag.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/rgbmatrix_pkg.vhd
@@ -393,7 +394,6 @@ set_global_assignment -name VHDL_FILE ../vhdl/ledctrl.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/jtag_iface.vhd
 set_global_assignment -name VHDL_FILE ../vhdl/clk_div.vhd
 set_global_assignment -name VHDL_FILE de0_nano.vhd
-
 set_global_assignment -name SIGNALTAP_FILE signaltap/de0nano.stp
 set_global_assignment -name SIGNALTAP_FILE signaltap/vjtag.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
