@@ -20,8 +20,6 @@ void setup() {
   // Erase the display before starting
   blank_leds();
   
-  // Setup the window
-  size(imgWidth * imgScale, imgHeight * imgScale);
   frameRate(30); // max FPS
 }
 
@@ -53,10 +51,14 @@ void draw() {
   
   // Stop when the end is reached
   if(frameNum >= panelsTall*panelsWide*pixelsTall*pixelsWide/4-1) {
-    exit();
+    frameNum = 0;//exit();
   } else {
     frameNum++;
   }
   
 }
 
+public void settings() {
+  // Setup the window
+  size(imgWidth * imgScale, imgHeight * imgScale);
+}

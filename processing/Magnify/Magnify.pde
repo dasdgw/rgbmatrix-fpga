@@ -34,8 +34,6 @@ void setup() {
     System.err.println("new Robot() failed.");
   }
   
-  // Setup the window
-  size(imgWidth * imgScale, imgHeight * imgScale);
   background(0);
   frameRate(30); // max FPS
 }
@@ -48,9 +46,9 @@ void draw() {
   // Get absolute mouse coordinates on screen, offset to center on LED array,
   // and constrain result so it doesn't extend offscreen in any direction.
   x = constrain(MouseInfo.getPointerInfo().getLocation().x - imgWidth  / 2,
-      0, screen.width  - imgWidth);
+      0, displayWidth  - imgWidth);
   y = constrain(MouseInfo.getPointerInfo().getLocation().y - imgHeight / 2,
-      0, screen.height - imgHeight);
+      0, displayHeight - imgHeight);
   r = new Rectangle(x, y, imgWidth, imgHeight);
 
   // Capture rectangle from screen, convert BufferedImage to PImage
@@ -65,3 +63,7 @@ void draw() {
   refresh(img);
 }
 
+public void settings() {
+  // Setup the window
+  size(imgWidth * imgScale, imgHeight * imgScale);
+}
